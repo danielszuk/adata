@@ -1,0 +1,37 @@
+<div class="container" [formGroup]="group">
+  <input
+    #input
+    *ngIf="!type || type == 'text' || type == 'number'"
+    class="input-field"
+    [type]="type || 'text'"
+    [id]="controlName"
+    [formControlName]="controlName"
+    [class.invalid]="
+      group.controls[controlName]?.touched &&
+      group.controls[controlName]?.invalid
+    "
+    [class.empty]="!group.controls[controlName]?.value"
+    [class.small]="size === null || size === undefined || size === 'small'"
+    [class.large]="size === 'large'"
+    [class.fill]="size === 'fill'"
+    [class.icon__placeholder]="icon"
+    [placeholder]="placeholder || ''"
+    [autofocus]="autofocus"
+  />
+  <div *ngIf="icon" class="icon__container">
+    <div class="icon">
+      <cle-icon [name]="icon" small></cle-icon>
+    </div>
+  </div>
+
+  <label *ngIf="label" class="input-label__container" [for]="controlName">
+    <div class="input-label">{{ label }}</div></label
+  >
+</div>
+
+<adata-form-error
+  [group]="group"
+  [controlName]="controlName"
+  [errorMessageFieldRequired]="errorMessageFieldRequired"
+  [errorMessageForbiddenValues]="errorMessageForbiddenValues"
+></adata-form-error>

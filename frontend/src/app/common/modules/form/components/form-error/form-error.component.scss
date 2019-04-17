@@ -1,0 +1,9 @@
+@import 'src/app/common/style/variables';
+@import '../../style/sizes';
+
+.form-error {
+  max-width: $sizeInputWidth;
+  padding-top: $space5;
+  color: $colorDanger;
+  font-size: $fontSize12;
+}

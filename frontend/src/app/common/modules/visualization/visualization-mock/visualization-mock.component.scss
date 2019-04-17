@@ -1,0 +1,85 @@
+@import 'src/app/common/style/variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+}
+
+.legends--mock__legend {
+  width: 100px;
+  height: 2px;
+  margin-left: auto;
+  margin-bottom: $space20;
+
+  background: $colorPrimary;
+}
+
+.graph--mock {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.graph--mock__lines {
+  flex-grow: 1;
+  display: flex;
+}
+
+.graph--mock__y-label__container {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 $space20 0 $space10;
+}
+
+.graph--mock__y-label {
+  height: 150px;
+  width: 2px;
+
+  background: $colorFontNormal;
+}
+
+.graph--mock__lines__columns {
+  flex-grow: 1;
+  display: flex;
+}
+
+$graphBorder: dashed $colorGrey 1px;
+.graph--mock__lines__column {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
+  border-right: $graphBorder;
+  &:first-child {
+    border-left: $graphBorder;
+  }
+}
+
+.graph--mock__lines__row {
+  flex-grow: 1;
+
+  border-bottom: $graphBorder;
+  &:first-child {
+    border-top: $graphBorder;
+  }
+}
+
+.graph--mock__x-label__container {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+
+  padding: $space20 0 $space10;
+}
+
+.graph--mock__x-label {
+  height: 2px;
+  width: 35px;
+
+  background: $colorFontNormal;
+}

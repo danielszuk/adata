@@ -1,0 +1,22 @@
+<div class="container" [class.full-screen]="fullScreen">
+  <div *ngIf="visualization; else loading">
+    <div *ngIf="!fullScreen" class="title spacing">
+      {{ visualization.title }}
+    </div>
+    <div *ngIf="!fullScreen" class="description spacing">
+      {{ visualization.description }}
+    </div>
+    <div class="visualization">
+      <adata-visualization
+        [visualization]="visualization"
+        interaction
+        class="adata-visualization"
+      ></adata-visualization>
+    </div>
+  </div>
+  <ng-template #loading>
+    <div class="flex-center container-gutter">
+      <cle-loader text="Loading visualization..."></cle-loader>
+    </div>
+  </ng-template>
+</div>

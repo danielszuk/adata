@@ -1,0 +1,67 @@
+<ng-template #cell let-column="column" let-row="row">
+  <div *ngIf="!column.pipe" [ngClass]="column.class">
+    <list-cell
+      [text]="column.property ? row[column.property] : undefined"
+      [icon]="column.icon"
+    ></list-cell>
+  </div>
+
+  <div
+    *ngIf="column.pipe && runPipe(row, column.pipe); let pipe"
+    [ngClass]="concatClasses(column.class, pipe.class)"
+  >
+    <list-cell [text]="pipe.text" [icon]="column.icon || pipe.icon"></list-cell>
+  </div>
+</ng-template>
+
+<div class="table">
+  <div class="header">
+    <div
+      *ngFor="let column of list.columns"
+      class="column header__column"
+      [class.align--left]="column.align === 'left'"
+      [style.flex-grow]="column.grow"
+    >
+      {{ column.name }}
+    </div>
+  </div>
+
+  <div *ngIf="list.rows && !list.loading" class="body">
+    <div *ngFor="let row of list.rows" class="body__row">
+      <div
+        *ngFor="let column of list.columns"
+        class="column body__row__column"
+        [class.align--left]="column.align === 'left'"
+        [style.flex-grow]="column.grow"
+      >
+        <ng-container *ngIf="!column.action">
+          <ng-container
+            *ngTemplateOutlet="cell; context: { column: column, row: row }"
+          ></ng-container>
+        </ng-container>
+
+        <button *ngIf="column.action" (click)="column.action(row)">
+          <ng-container
+            *ngTemplateOutlet="cell; context: { column: column, row: row }"
+          ></ng-container>
+        </button>
+      </div>
+
+      <div
+        *ngIf="rowLoading(row.id); let rowLoader"
+        class="body__row__loader"
+        @ngIfOpacity
+      >
+        <cle-loader tiny></cle-loader>
+        <div class="body__row__loader__text" *ngIf="rowLoader.text">
+          {{ rowLoader.text }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="list.loading" class="rows__loader">
+    <cle-loader tiny></cle-loader>
+    <div class="rows__loader__text">Loading</div>
+  </div>
+</div>

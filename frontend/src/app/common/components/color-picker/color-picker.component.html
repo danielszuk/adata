@@ -1,0 +1,14 @@
+<div [adataClickOutside]="isOpen" (clickedOutside)="toggleDropdown(false)">
+  <div class="container" (click)="toggleDropdown(!isOpen)">
+    <div class="circle" [style.background-color]="getColorCode"></div>
+    <cle-icon name="small-down" small></cle-icon>
+    <div *ngIf="isOpen" @ngIfHeight class="dropdown">
+      <div
+        *ngFor="let color of colorArray"
+        class="dropdown__element"
+        [style.background-color]="color.hex"
+        (click)="changeColor(color.name)"
+      ></div>
+    </div>
+  </div>
+</div>

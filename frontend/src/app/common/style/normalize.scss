@@ -1,0 +1,47 @@
+@import '../node_modules/normalize.css/normalize.css';
+@import 'variables';
+
+// [type='button'] selector required for prevent chrome default style (bug)
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  font-family: $fontFamilyNormal; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  appearance: none !important;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: separate;
+}
+
+.ng-animating {
+  overflow: hidden !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:visited {
+    color: inherit;
+  }
+}

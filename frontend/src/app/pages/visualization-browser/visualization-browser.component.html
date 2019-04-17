@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="cards" *ngIf="!visualizationLoading; else loading">
+    <div *ngFor="let visualization of visualizations" class="card__container">
+      <a [routerLink]="['/visualization', visualization.id]">
+        <div class="card">
+          <h2 class="card__title">{{ visualization.title }}</h2>
+          <p class="card__description" *ngIf="visualization.description">
+            {{ TruncateText(visualization.description, 100) }}
+          </p>
+
+          <div class="visualization">
+            <adata-visualization
+              [visualization]="visualization"
+            ></adata-visualization>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="card__container">
+      <a [routerLink]="['/creator']">
+        <div class="card">
+          <div class="card__title card__title--mock"></div>
+          <div class="card__description card__description--mock"></div>
+          <div class="visualization">
+            <adata-visualization-mock></adata-visualization-mock>
+          </div>
+
+          <div class="card--creator-cta__overlay">
+            <cle-button
+              value="Create your own visualization"
+              icon="c-add"
+              disableHover
+            ></cle-button>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <ng-template #loading>
+    <div class="flex-center container-gutter">
+      <cle-loader text="Loading visualizations..."></cle-loader>
+    </div>
+  </ng-template>
+  <adata-pagination
+    [pagination]="{ count: count, countPerPage: 10 }"
+  ></adata-pagination>
+</div>

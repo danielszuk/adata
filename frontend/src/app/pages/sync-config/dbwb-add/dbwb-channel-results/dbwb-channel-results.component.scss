@@ -1,0 +1,42 @@
+@import 'src/app/common/style/variables';
+
+.results__container {
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.results {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: column;
+
+  background: $colorBackground;
+  box-shadow: $shadowNormal;
+
+  overflow-x: auto;
+}
+
+.results__total {
+  padding: $space10 0;
+
+  background: $colorPrimary;
+  color: $colorWhite;
+  text-align: center;
+  font-size: $fontSize18;
+  font-weight: $fontWeightSemiBold;
+}
+
+.col {
+  padding: $space10;
+
+  text-align: center;
+}
+
+.header__col,
+.body__row:not(:last-child) .col {
+  border-bottom: solid 1px $colorGrey;
+}

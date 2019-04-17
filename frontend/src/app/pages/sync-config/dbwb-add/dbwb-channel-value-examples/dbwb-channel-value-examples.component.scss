@@ -1,0 +1,15 @@
+@import 'src/app/common/style/variables';
+
+.examples {
+  padding-top: $space5;
+
+  color: $colorFontGrey;
+  font-size: $fontSize12;
+}
+
+.example {
+  &:not(:last-child):after {
+    content: ',';
+    padding-right: $space5;
+  }
+}

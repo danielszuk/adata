@@ -1,0 +1,58 @@
+/*------------------------
+	icons
+-------------------------*/
+@function unicode($str) {
+  @return unquote("\"\\#{$str}\"");
+}
+
+$icon-single-03: unicode(ea04);
+$icon-small-down: unicode(ea05);
+$icon-c-add: unicode(ea07);
+$icon-ic_arrow_drop_down_24px: unicode(ea08);
+$icon-i-remove: unicode(ea0a);
+$icon-migration: unicode(ea0b);
+$icon-zoom: unicode(ea0d);
+$icon-pen-2: unicode(ea0f);
+$icon-c-question: unicode(ea11);
+$icon-c-info: unicode(ea12);
+
+.icon-single-03::before {
+  content: $icon-single-03;
+}
+
+.icon-small-down::before {
+  content: $icon-small-down;
+}
+
+.icon-c-add::before {
+  content: $icon-c-add;
+}
+
+.icon-ic_arrow_drop_down_24px::before {
+  content: $icon-ic_arrow_drop_down_24px;
+}
+
+.icon-i-remove::before {
+  content: $icon-i-remove;
+}
+
+.icon-migration::before {
+  content: $icon-migration;
+}
+
+.icon-zoom::before {
+  content: $icon-zoom;
+}
+
+.icon-pen-2::before {
+  content: $icon-pen-2;
+}
+
+.icon-c-question::before {
+  content: $icon-c-question;
+}
+
+.icon-c-info::before {
+  content: $icon-c-info;
+}
+

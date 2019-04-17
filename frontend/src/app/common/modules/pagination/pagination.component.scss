@@ -1,0 +1,36 @@
+@import '../../../common/style/variables.scss';
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style: none;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.link {
+  margin: 5px;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.page {
+  font-weight: $fontWeightSemiBold;
+}
+
+.active {
+  border-radius: 50%;
+  border: 2px solid $colorPrimary;
+  color: $colorPrimary;
+  pointer-events: none;
+  font-weight: $fontWeightSemiBold;
+}
+
+.dots {
+  color: $colorGreyDark;
+}

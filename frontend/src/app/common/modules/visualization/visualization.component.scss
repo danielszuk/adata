@@ -1,0 +1,117 @@
+@import 'src/app/common/style/variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+}
+
+.legends {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+$lineWidth: 2px;
+
+.legend {
+  display: flex;
+  align-items: center;
+
+  margin: 0 0 $space5 $space15;
+
+  font-size: $fontSize12;
+  font-weight: $fontWeightBold;
+}
+
+.legend__line {
+  width: $space15;
+  height: $lineWidth;
+
+  margin-right: $space5;
+
+  background: black;
+}
+
+.c3-container {
+  height: 100%;
+}
+
+:host ::ng-deep .c3 svg {
+  font-family: $fontFamilyNormal !important;
+  overflow: visible !important;
+
+  .c3-line {
+    stroke-width: $lineWidth;
+  }
+
+  .c3-circle {
+    display: none;
+  }
+
+  .domain {
+    display: none;
+  }
+
+  .tick {
+    font-size: $fontSize10;
+    font-weight: $fontWeightSemiBold;
+    fill: $colorFontGrey;
+
+    line {
+      display: none;
+    }
+  }
+
+  .c3-axis-x-label,
+  .c3-axis-y-label,
+  .c3-axis-y2-label {
+    text-transform: uppercase;
+    font-weight: $fontWeightSemiBold;
+    letter-spacing: $fontLetterSpacing25;
+  }
+
+  .c3-axis-x-label {
+    transform: translateY(6px);
+  }
+
+  .c3-xgrid,
+  .c3-ygrid {
+    stroke: $colorGrey;
+  }
+
+  .c3-xgrid-focus {
+    stroke: $colorBlack;
+  }
+}
+:host ::ng-deep {
+  .c3-tooltip-container {
+    border: 1px solid $colorBlack;
+    border-radius: $sizeBorderRadius;
+    background-color: $colorWhite;
+
+    table,
+    th,
+    td {
+      background-color: $colorWhite;
+      border: solid transparent;
+      color: $colorFontGrey;
+    }
+
+    .value__container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .value__name {
+        padding-right: $space10;
+      }
+    }
+  }
+
+  .c3-tooltip {
+    background-color: transparent !important;
+  }
+}

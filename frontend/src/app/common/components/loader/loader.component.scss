@@ -1,0 +1,233 @@
+@import 'src/app/common/style/variables';
+
+:host {
+  display: flex;
+}
+
+$sizeBorderLoader: 2.5px;
+$sizeBorderLoaderTiny: 2px;
+
+.loader__container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loader {
+  border: $sizeBorderLoader solid transparent;
+  border-color: transparent;
+  border-left-color: $colorPrimary;
+  animation: spin-around $transitionSlow 0s infinite;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border $transitionNormal;
+
+  &.complete {
+    animation: none;
+    border-color: $colorSuccess;
+  }
+
+  &.failed {
+    animation: none;
+    border-color: $colorDanger;
+  }
+
+  &.dark {
+    border-left-color: $colorFontNormal;
+  }
+
+  &.light {
+    border-left-color: $colorFontGrey;
+  }
+}
+
+.loader__text {
+  width: $sizeLoader * 2.5;
+  margin-top: $space15;
+  text-align: center;
+  color: $colorPrimary;
+  font-weight: $fontWeightBold;
+}
+
+.loader,
+.loader::after {
+  border-radius: 50%;
+  width: $sizeLoader;
+  height: $sizeLoader;
+}
+
+.loader__container.tiny .loader,
+.loader__container.tiny .loader::after {
+  border-width: $sizeBorderLoaderTiny;
+  border-radius: 50%;
+  width: $sizeLoaderTiny;
+  height: $sizeLoaderTiny;
+}
+
+.loader__container.small .loader,
+.loader__container.small .loader::after {
+  border-radius: 50%;
+  width: $sizeLoaderSmall;
+  height: $sizeLoaderSmall;
+}
+
+.loader__failed__x {
+  position: relative;
+  width: $sizeBorderLoader;
+  height: 60%;
+  background: $colorDanger;
+  transform: rotate(45deg);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $colorDanger;
+    transform: rotate(90deg);
+  }
+}
+
+.loader__checkmark {
+  display: none;
+}
+
+.loader.complete .loader__checkmark {
+  display: block;
+}
+
+.loader__checkmark.draw::after {
+  animation-duration: 1.2s;
+  animation-timing-function: ease;
+  animation-name: checkmark;
+  transform: scaleX(-1) rotate(135deg);
+}
+
+.loader__container.tiny .loader__checkmark.draw::after {
+  animation-name: checkmarkTiny;
+}
+
+.loader__container.small .loader__checkmark.draw::after {
+  animation-name: checkmarkSmall;
+}
+
+.loader__checkmark::after {
+  opacity: 1;
+  height: $sizeLoader / 2;
+  width: $sizeLoader / 4;
+  transform-origin: left top;
+  border-right: $sizeBorderLoader solid $colorSuccess;
+  border-top: $sizeBorderLoader solid $colorSuccess;
+  content: '';
+  left: $sizeLoader / 4 - $sizeBorderLoader;
+  top: $sizeLoader / 2 + $sizeBorderLoader / 2;
+  position: absolute;
+}
+
+.loader__container.tiny .loader__checkmark::after {
+  border-right-width: $sizeBorderLoaderTiny;
+  border-top-width: $sizeBorderLoaderTiny;
+  height: $sizeLoaderTiny / 2;
+  width: $sizeLoaderTiny / 4;
+  left: $sizeLoaderTiny / 4 - $sizeBorderLoaderTiny;
+  top: $sizeLoaderTiny / 2 + $sizeBorderLoaderTiny / 2;
+}
+
+.loader__container.small .loader__checkmark::after {
+  height: $sizeLoaderSmall / 2;
+  width: $sizeLoaderSmall / 4;
+  left: $sizeLoaderSmall / 4 - $sizeBorderLoader;
+  top: $sizeLoaderSmall / 2 + $sizeBorderLoader / 2;
+}
+
+@keyframes spin-around {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+
+  20% {
+    height: 0;
+    width: $sizeLoader / 4;
+    opacity: 1;
+  }
+
+  40% {
+    height: $sizeLoader / 2;
+    width: $sizeLoader / 4;
+    opacity: 1;
+  }
+
+  100% {
+    height: $sizeLoader / 2;
+    width: $sizeLoader / 4;
+    opacity: 1;
+  }
+}
+
+@keyframes checkmarkTiny {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+
+  20% {
+    height: 0;
+    width: $sizeLoaderTiny / 4;
+    opacity: 1;
+  }
+
+  40% {
+    height: $sizeLoaderTiny / 2;
+    width: $sizeLoaderTiny / 4;
+    opacity: 1;
+  }
+
+  100% {
+    height: $sizeLoaderTiny / 2;
+    width: $sizeLoaderTiny / 4;
+    opacity: 1;
+  }
+}
+
+@keyframes checkmarkSmall {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+
+  20% {
+    height: 0;
+    width: $sizeLoaderSmall / 4;
+    opacity: 1;
+  }
+
+  40% {
+    height: $sizeLoaderSmall / 2;
+    width: $sizeLoaderSmall / 4;
+    opacity: 1;
+  }
+
+  100% {
+    height: $sizeLoaderSmall / 2;
+    width: $sizeLoaderSmall / 4;
+    opacity: 1;
+  }
+}

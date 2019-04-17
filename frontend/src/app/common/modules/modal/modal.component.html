@@ -1,0 +1,24 @@
+<div *ngIf="display" class="container">
+  <div *ngIf="visible" class="background" @ngIfOpacity (click)="close()"></div>
+
+  <div
+    *ngIf="visible"
+    class="modal"
+    @modalFadeFromUp
+    (@modalFadeFromUp.done)="animationDone($event)"
+  >
+    <div class="modal__header">
+      <h3 class="modal__header__title">{{ title }}</h3>
+
+      <div class="modal__close">
+        <button (click)="close()">
+          <cle-icon name="i-remove" medium></cle-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="modal__content">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

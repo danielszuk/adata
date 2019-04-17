@@ -1,0 +1,25 @@
+@import '../variables';
+
+@import url($fontFamilyNormalUrl);
+
+body {
+  font-family: $fontFamilyNormal;
+  font-size: $fontSize14;
+  font-weight: $fontWeightNormal;
+  line-height: $fontLineHeightNormal;
+  color: $colorFontNormal;
+}
+
+h2 {
+  margin: 0;
+
+  font-size: $fontSize24;
+  font-weight: $fontWeightSemiBold;
+}
+
+p {
+  margin: 0;
+
+  color: $colorFontGrey;
+  font-weight: $fontWeightSemiBold;
+}

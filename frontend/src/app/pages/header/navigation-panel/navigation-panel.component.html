@@ -1,0 +1,88 @@
+<div
+  class="container"
+  adataClickOutside="sidenavOpen"
+  (clickedOutside)="setSidenavOpen(false)"
+>
+  <div class="sidenav__control">
+    <div class="mobile">
+      <button class="hamburger" (click)="setSidenavOpen(!sidenavOpen)">
+        <adata-hamburger [active]="sidenavOpen"></adata-hamburger>
+      </button>
+    </div>
+    <div class="desktop">
+      <div *ngIf="!authService.getUser; else dropdownController">
+        <button (click)="authService.signInAttempt()" class="link">
+          SIGN IN
+        </button>
+      </div>
+      <ng-template #dropdownController>
+        <div>
+          <button (click)="setSidenavOpen(!sidenavOpen)">
+            <div class="dropdown__controller--desktop link">
+              <div class="avatar">
+                <cle-icon name="single-03" big="1"></cle-icon>
+              </div>
+              <div class="arrow">
+                <cle-icon name="small-down" big="1"></cle-icon>
+              </div>
+            </div>
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <div *ngIf="sidenavOpen" @ngIfWidth class="sidenav__container">
+    <div class="navigation-list__container">
+      <ul class="navigation-list">
+        <li class="navigation-list__elem mobile">
+          <a [routerLink]="['/', 'browser']" routerLinkActive="active">
+            BROWSER
+          </a>
+        </li>
+
+        <li class="navigation-list__elem mobile">
+          <a routerLink="/creator" routerLinkActive="active">
+            CREATOR
+          </a>
+        </li>
+
+        <li *ngIf="authService.getUser" class="navigation-list__elem ">
+          <a routerLink="/my-visualizations" routerLinkActive="active">
+            MY VISUALIZATIONS
+          </a>
+        </li>
+
+        <ng-container
+          *ngIf="authService.getUser ? authService.getUser.admin : false"
+        >
+          <li
+            class="navigation-list__elem"
+            *ngIf="authService.getUser && authService.getUser.admin"
+          >
+            <a routerLink="/sync-config/channels" routerLinkActive="active">
+              CHANNELS CONFIG
+            </a>
+          </li>
+          <li
+            class="navigation-list__elem"
+            *ngIf="authService.getUser && authService.getUser.admin"
+          >
+            <a routerLink="/sync-config/dimensions" routerLinkActive="active">
+              DIMENSIONS CONFIG
+            </a>
+          </li>
+        </ng-container>
+        <li *ngIf="!authService.getUser" class="navigation-list__elem mobile">
+          <button (click)="authService.signInAttempt()">
+            SIGN IN
+          </button>
+        </li>
+        <li *ngIf="authService.getUser" class="navigation-list__elem">
+          <button (click)="signOut()">
+            SIGN OUT
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="container">
+  <div>
+    <div class="header">
+      <h3>Dimensions</h3>
+
+      <div class="add-dimension__button">
+        <cle-button
+          value="Add Dimension"
+          icon="c-add"
+          (click)="openUpdateModal('add')"
+        ></cle-button>
+      </div>
+    </div>
+
+    <div class="dimensions-list">
+      <cle-list [list]="dimensions"></cle-list>
+    </div>
+  </div>
+</div>
+
+<cle-modal
+  #updateDimensionModal
+  [title]="updateMode === 'add' ? 'Add new dimension' : 'Edit dimension'"
+>
+  <form [formGroup]="updateDimensionForm" (submit)="update()">
+    <div class="add-dimension">
+      <div>
+        <div class="form-field">
+          <adata-form-input
+            [group]="updateDimensionForm"
+            controlName="name"
+            placeholder="Dimension name"
+            errorMessageForbiddenValues="The specified Dimension name is already exists."
+          ></adata-form-input>
+        </div>
+
+        <div class="form-field">
+          <adata-form-input
+            [group]="updateDimensionForm"
+            controlName="unit"
+            placeholder="Unit (optional)"
+          ></adata-form-input>
+        </div>
+      </div>
+      <cle-button
+        [value]="updateMode === 'add' ? 'Add' : 'Save'"
+        [icon]="updateMode === 'add' ? 'c-add' : undefined"
+        [loader]="updatingNewDimensionLoader"
+      ></cle-button>
+    </div>
+  </form>
+</cle-modal>

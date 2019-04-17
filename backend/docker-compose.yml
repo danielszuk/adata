@@ -1,0 +1,66 @@
+version: '3'
+services:
+  # POSTGRES
+  postgres:
+    container_name: postgres
+    image: postgres
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    networks:
+      - postgres
+    restart: always
+  # PGWEB
+  pgweb:
+    container_name: pgweb
+    image: sosedoff/pgweb
+    env_file:
+    - .env
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable
+    ports:
+      - "${PGWEB_PORT}:8081"
+    links: 
+    - postgres:postgres
+    networks:
+      - postgres
+    depends_on:
+      - postgres
+    restart: always
+  # API
+  api:
+    container_name: api
+    build: ./
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_PORT=5432
+      - APP_TYPES=api
+    ports:
+      - '${API_PORT}:3000'
+    expose:
+      - ${API_PORT}
+    volumes:
+      - ./src:/usr/src/app/src
+    links:
+      - postgres:postgres
+    depends_on:
+      - postgres
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
+  
+volumes:
+  postgres:
+  pgweb:

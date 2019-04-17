@@ -1,0 +1,37 @@
+@import 'src/app/common/style/variables';
+
+$paddingSize: $space10;
+
+.container {
+  position: relative;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  padding: $paddingSize;
+
+  background-color: $colorWhite;
+  border-radius: $sizeBorderRadius;
+  border: $sizeBorder solid;
+}
+
+.title {
+  white-space: nowrap;
+}
+
+.color-picker {
+  padding-left: $paddingSize;
+}
+
+.remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  transform: translate(40%, -40%);
+
+  color: $colorDanger;
+  background-color: $colorWhite;
+  border: $sizeBorder solid $colorDanger;
+  border-radius: 50%;
+}

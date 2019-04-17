@@ -1,0 +1,118 @@
+@import 'src/app/common/style/variables';
+
+$spacing: $space20;
+
+.header {
+  z-index: $zIndexHeader;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: stretch;
+
+  height: $sizeHeader;
+  width: 100%;
+
+  box-shadow: $shadowLight;
+  background-color: white;
+}
+
+.logo__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 100%;
+
+  padding: 0 $spacing 0 $space10;
+  @media #{$bp-st-desktop} {
+    padding-right: $space10;
+  }
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+
+  height: 100%;
+  padding: 0 $spacing;
+
+  font-weight: $fontWeightSemiBold;
+  cursor: pointer;
+}
+
+.top__nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  height: 100%;
+}
+
+.active {
+  color: $colorPrimary;
+}
+
+.right__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  margin-left: auto;
+  height: 100%;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
+
+.search__input {
+  z-index: $zIndexNavigationSearch;
+  width: 100%;
+
+  background-color: white;
+}
+
+.icon__search {
+  z-index: $zIndexSearchIcon;
+  position: absolute;
+  right: 0;
+  top: 50%;
+
+  padding: $spacing;
+  padding-right: $spacing/2;
+
+  color: $colorPrimary;
+
+  transform: translateY(-50%);
+}
+
+.sign__in {
+  white-space: nowrap;
+  padding-right: $spacing/4;
+}
+
+.hamburger {
+  padding: $spacing $spacing/2 $spacing $spacing/4;
+}
+
+.nav__panel {
+  position: fixed;
+  top: $sizeHeader;
+  right: 0;
+}
+
+.st-desktop {
+  @media #{$bp-desktop} {
+    display: none !important;
+  }
+}
+
+.desktop {
+  @media #{$bp-st-desktop} {
+    display: none !important;
+  }
+}

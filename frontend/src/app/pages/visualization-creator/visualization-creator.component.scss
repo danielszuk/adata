@@ -1,0 +1,114 @@
+@import '../../common/style/variables.scss';
+
+$spacing: $space30;
+$spacingStDesktop: $space20;
+
+.spacing {
+  margin: $spacing;
+
+  @media #{$bp-st-desktop} {
+    margin: $spacingStDesktop;
+  }
+}
+
+.input {
+  width: 50%;
+}
+
+.textarea {
+  width: 75%;
+}
+
+.input ::ng-deep {
+  .input-field {
+    height: auto;
+    padding-top: $space10;
+    padding-bottom: $space10;
+
+    font-size: $fontSize24;
+  }
+}
+
+.select ::ng-deep {
+  .input-field {
+    background-color: $colorWhite;
+  }
+}
+
+.container__badge {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.badge {
+  margin-right: $spacing;
+  margin-bottom: $space20;
+}
+
+.visualization,
+.visualization__mock {
+  height: 80vh;
+  padding: $spacing;
+  @media #{$bp-st-desktop} {
+    padding: $spacingStDesktop;
+  }
+
+  background-color: $colorWhite;
+  border-radius: $sizeBorderRadius;
+}
+
+.visualization__mock__container {
+  position: relative;
+  background-color: $colorWhite;
+}
+
+.visualization__mock {
+  opacity: $opacityTransparent;
+}
+
+.attention__container {
+  z-index: 1;
+  position: absolute;
+  top: $space15;
+  left: $space80;
+  right: 0;
+  height: 50%;
+  max-height: 269px;
+  @media #{$bp-st-desktop} {
+    left: $space15;
+    height: 25%;
+  }
+
+  display: flex;
+  align-items: flex-end;
+
+  font-size: $fontSize24;
+  text-align: center;
+  @media #{$bp-st-desktop} {
+    font-size: $fontSize18;
+  }
+}
+
+.attention__arrow {
+  height: 100%;
+  width: 50%;
+  max-width: 232px;
+}
+.attention__arrow__svg {
+  width: 100%;
+  height: 100%;
+}
+.attention__arrow__svg__g {
+  stroke: $colorPrimary;
+  stroke-width: 2;
+}
+
+.attention__text {
+  margin: 0 0 $space5 $space15;
+  padding-right: $space15;
+  transform: translateY(50%);
+
+  text-align: left;
+}

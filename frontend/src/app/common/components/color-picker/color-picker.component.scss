@@ -1,0 +1,45 @@
+@import 'src/app/common/style/variables';
+
+$circleSize: $space20;
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 2 * $circleSize;
+
+  cursor: pointer;
+}
+
+.circle {
+  height: $circleSize;
+  width: $circleSize;
+
+  border-radius: 50%;
+}
+
+.dropdown {
+  z-index: 1;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  top: 100%;
+  left: -25%;
+  width: 150%;
+  margin-top: $space5;
+
+  border-radius: $sizeBorderRadius;
+  background-color: $colorWhite;
+}
+
+.dropdown__element {
+  width: $circleSize;
+  height: $circleSize;
+  margin: $space5;
+
+  border-radius: 50%;
+}

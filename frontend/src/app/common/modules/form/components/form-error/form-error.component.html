@@ -1,0 +1,83 @@
+<!-- General error message -->
+<div *ngIf="force" @ngIfHeight>
+  <div class="form-error">{{ errorMessage }}</div>
+</div>
+
+<!-- Field specific error messages -->
+<ng-container
+  *ngIf="!force && fieldControl && fieldControl.touched && fieldControl.invalid"
+>
+  <div *ngIf="errorMessage" @ngIfHeight>
+    <div class="form-error" [innerHTML]="errorMessage"></div>
+  </div>
+
+  <ng-container *ngIf="!errorMessage">
+    <div *ngIf="fieldControl.errors['isNotEmpty']" @ngIfHeight>
+      <div class="form-error">
+        {{ errorMessageFieldRequired || 'This field is required.' }}
+      </div>
+    </div>
+
+    <ng-container
+      *ngIf="fieldControl.errors && !fieldControl.errors['isNotEmpty']"
+    >
+      <div *ngIf="fieldControl.errors['email']" @ngIfHeight>
+        <div class="form-error">Invalid email format. Please check again!</div>
+      </div>
+
+      <div *ngIf="fieldControl.errors['isURL']" @ngIfHeight>
+        <div class="form-error">Invalid URL format. Please check again!</div>
+      </div>
+
+      <div *ngIf="fieldControl.errors['isNumberString']" @ngIfHeight>
+        <div class="form-error">Has to be a number!</div>
+      </div>
+
+      <div *ngIf="fieldControl.errors['isEnum']" @ngIfHeight>
+        <div class="form-error">
+          Has to be one of the following:<br />
+          {{ enumValues(fieldControl.errors['isEnum'][0]) }}
+        </div>
+      </div>
+
+      <div
+        *ngIf="
+          fieldControl.errors['minLength'] ||
+          (fieldControl.errors['length'] && fieldControl.errors['length'][0])
+        "
+        @ngIfHeight
+      >
+        <div class="form-error">
+          Please enter at least
+          {{
+            fieldControl.errors['minLength']
+              ? fieldControl.errors['minLength'][0]
+              : fieldControl.errors['length'][0]
+          }}
+          characters!
+        </div>
+      </div>
+
+      <div
+        *ngIf="
+          fieldControl.errors['maxLength'] || fieldControl.errors['length']
+        "
+        @ngIfHeight
+      >
+        <div class="form-error">
+          Please enter no more than
+          {{
+            fieldControl.errors['maxLength']
+              ? fieldControl.errors['maxLength'][0]
+              : fieldControl.errors['length'][1]
+          }}
+          characters!
+        </div>
+      </div>
+
+      <div *ngIf="fieldControl.errors['forbiddenValues']" @ngIfHeight>
+        <div class="form-error" [innerHtml]="errorMessageForbiddenValues"></div>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>

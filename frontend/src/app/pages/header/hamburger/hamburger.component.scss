@@ -1,0 +1,155 @@
+@import 'src/app/common/style/variables';
+
+.hamburger {
+  display: flex;
+  align-items: center;
+}
+
+$hamburgerLineWidth: 25px;
+$hamburgerLineHeight: 2px;
+$hamburgerLineDist: 7px;
+
+.hamburger__line {
+  width: $hamburgerLineWidth;
+  height: $hamburgerLineHeight;
+  background: $colorFontNormal;
+}
+
+.hamburger__line--middle {
+  margin: $hamburgerLineDist 0;
+
+  &.active {
+    animation: hamburgerMiddleToActive $transitionNormal forwards;
+  }
+
+  &.inactive {
+    animation: hamburgerMiddleToInactive $transitionNormal forwards;
+  }
+}
+
+@keyframes hamburgerMiddleToActive {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  51% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes hamburgerMiddleToInactive {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  51% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.hamburger__line--top {
+  position: relative;
+
+  &.active {
+    animation: hamburgerTopToActive $transitionNormal forwards;
+  }
+
+  &.inactive {
+    animation: hamburgerTopToInactive $transitionNormal forwards;
+  }
+}
+
+@keyframes hamburgerTopToActive {
+  0% {
+    top: 0;
+    transform: rotate(0);
+  }
+
+  50% {
+    top: $hamburgerLineHeight + $hamburgerLineDist;
+    transform: rotate(0);
+  }
+
+  100% {
+    top: $hamburgerLineHeight + $hamburgerLineDist;
+    transform: rotate(-45deg);
+  }
+}
+
+@keyframes hamburgerTopToInactive {
+  0% {
+    top: $hamburgerLineHeight + $hamburgerLineDist;
+    transform: rotate(-45deg);
+  }
+
+  50% {
+    top: $hamburgerLineHeight + $hamburgerLineDist;
+    transform: rotate(0);
+  }
+
+  100% {
+    top: 0;
+    transform: rotate(0);
+  }
+}
+
+.hamburger__line--bottom {
+  position: relative;
+
+  &.active {
+    animation: hamburgerBottomToActive $transitionNormal forwards;
+  }
+
+  &.inactive {
+    animation: hamburgerBottomToInactive $transitionNormal forwards;
+  }
+}
+
+@keyframes hamburgerBottomToActive {
+  0% {
+    top: 0;
+  }
+
+  50% {
+    top: -1 * ($hamburgerLineHeight + $hamburgerLineDist);
+    transform: rotate(0);
+  }
+
+  100% {
+    top: -1 * ($hamburgerLineHeight + $hamburgerLineDist);
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes hamburgerBottomToInactive {
+  0% {
+    top: -1 * ($hamburgerLineHeight + $hamburgerLineDist);
+    transform: rotate(45deg);
+  }
+
+  50% {
+    top: -1 * ($hamburgerLineHeight + $hamburgerLineDist);
+    transform: rotate(0);
+  }
+
+  100% {
+    top: 0;
+    transform: rotate(0);
+  }
+}

@@ -1,0 +1,107 @@
+@import 'src/app/common/style/variables';
+
+$spacing: $space20;
+
+.mobile {
+  @media #{$bp-desktop} {
+    display: none !important;
+  }
+}
+.desktop {
+  @media #{$bp-st-desktop} {
+    display: none !important;
+  }
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+
+  height: 100%;
+}
+.hamburger {
+  padding: $space10;
+  cursor: pointer;
+}
+.link {
+  padding: $spacing;
+
+  font-weight: $fontWeightSemiBold;
+}
+
+.dropdown__controller--desktop {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+
+  padding: $space10 $space20;
+
+  $avatarWidth: 42px;
+
+  .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: $avatarWidth;
+    height: $avatarWidth;
+    padding: $space5;
+    box-sizing: border-box;
+
+    border-radius: 50%;
+    background-color: $colorPrimary;
+    color: $colorWhite;
+  }
+
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: $colorPrimary;
+  }
+}
+
+.sidenav__container {
+  position: absolute;
+  top: 100%;
+  right: 0;
+
+  background-color: $colorWhite;
+  box-shadow: $shadowLight;
+}
+
+.navigation-list__container {
+  width: 200px;
+
+  text-align: right;
+}
+
+$navigationListSpacingVertical: $space10;
+.navigation-list {
+  list-style-type: none;
+  white-space: nowrap;
+
+  padding-bottom: $navigationListSpacingVertical;
+}
+
+.navigation-list__elem {
+  a,
+  button {
+    display: block;
+
+    width: 100%;
+    padding: $navigationListSpacingVertical $space20;
+    box-sizing: border-box;
+
+    text-align: right;
+    font-weight: $fontWeightSemiBold;
+  }
+}
+
+.active {
+  color: $colorPrimary;
+}

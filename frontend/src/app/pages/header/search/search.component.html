@@ -1,0 +1,17 @@
+<form
+  class="search__container__container"
+  [formGroup]="searchForm"
+  (submit)="search()"
+>
+  <label class="search__container">
+    <adata-form-input
+      (input)="searchDelayed()"
+      [group]="searchForm"
+      controlName="search"
+      placeholder="Search"
+      autofocus="1"
+      allowEmptyString="1"
+      icon="zoom"
+    ></adata-form-input>
+  </label>
+</form>

@@ -1,0 +1,107 @@
+@import 'src/app/common/style/variables';
+
+.container {
+  padding: $spaceGridGutter / 2;
+  @media #{$bp-st-desktop} {
+    padding: 0;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.card__container {
+  width: 50%;
+  padding: $spaceGridGutter / 2;
+  box-sizing: border-box;
+
+  @media #{$bp-st-desktop} {
+    width: 100%;
+    padding: 0;
+    margin-top: $space20;
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  height: calc(100vh - #{$sizeHeader} - #{$spaceGridGutter * 2});
+  max-height: 700px;
+  @media #{$bp-st-desktop} {
+    max-height: 500px;
+  }
+
+  background: $colorWhite;
+  border: solid $sizeBorderThick transparent;
+  border-radius: $sizeBorderRadius;
+  @media #{$bp-st-desktop} {
+    border-radius: 0;
+  }
+  transition: border $transitionNormal;
+}
+
+.card__title {
+  flex-shrink: 0;
+
+  padding: $space15;
+
+  transition: color $transitionNormal;
+}
+
+:host-context(.device--mouse) .card:hover {
+  border-color: $colorPrimary;
+
+  .card__title {
+    color: $colorPrimary;
+  }
+}
+
+.card__title--mock {
+  padding: 0;
+  margin: $space30 $space15 $space30;
+  height: 10px;
+  width: 100%;
+  max-width: 200px;
+  background: $colorFontNormal;
+}
+
+.card__description {
+  flex-shrink: 0;
+
+  padding: 0 $space15 $spaceGridGutter;
+}
+
+.card__description--mock {
+  padding: 0;
+  margin: 0 $space15 $spaceGridGutter + $space15;
+  height: 6px;
+  width: 100%;
+  max-width: 500px;
+  background: $colorFontGrey;
+}
+
+.visualization {
+  flex-grow: 1;
+  padding: 0 $space15 $space15;
+}
+
+.card--creator-cta__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba($colorBackground, $opacityLightlyOverlay);
+  border-radius: $sizeBorderRadius;
+}

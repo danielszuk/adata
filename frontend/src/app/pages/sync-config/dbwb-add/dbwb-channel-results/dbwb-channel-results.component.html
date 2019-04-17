@@ -1,0 +1,28 @@
+<div
+  #container
+  *ngIf="totalResults"
+  class="results__container"
+  @ngIfHeight
+  (@ngIfHeight.done)="animationDone($event)"
+>
+  <div class="results">
+    <div class="results__total">Total rows: {{ totalResults }}</div>
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let property of properties" class="header__col col">
+            {{ property }}
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let result of results" class="body__row">
+          <td *ngFor="let property of properties" class="body__col col">
+            {{ result[property] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

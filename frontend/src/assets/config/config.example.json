@@ -1,0 +1,4 @@
+{
+  "backendUrl": "<URL of backend excluding trailing slash>",
+  "inputTimeoutBeforeServerCall": "<milisecs after input changes and before server call>"
+}

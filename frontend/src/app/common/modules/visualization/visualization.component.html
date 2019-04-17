@@ -1,0 +1,20 @@
+<div class="container">
+  <div #legends class="legends">
+    <div *ngFor="let data of chartDataArray" class="legend">
+      <div
+        *ngIf="colorPattern !== {} && data[0] !== 'x'"
+        class="legend__line"
+        [style.background-color]="colorPattern[data[0]]"
+      ></div>
+      <div
+        *ngIf="colorPattern !== {} && data[0] !== 'x'"
+        [style.color]="colorPattern[data[0]]"
+      >
+        {{ data[0] }}
+      </div>
+    </div>
+  </div>
+  <div #c3DomContainer class="c3-container">
+    <div #c3Dom class="c3" [style.left.px]="chartXPadding"></div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div *ngIf="headerService.visible" class="header">
+  <a [routerLink]="['browser']">
+    <div class="logo__container">
+      <img class="logo" src="assets/adata-logo.svg" />
+    </div>
+  </a>
+  <div class="top__nav">
+    <a
+      class="nav__links desktop"
+      [routerLink]="['browser']"
+      [routerLinkActive]="['active']"
+    >
+      BROWSER
+    </a>
+    <a
+      class="nav__links desktop"
+      [routerLink]="['creator']"
+      [routerLinkActive]="['active']"
+    >
+      CREATOR
+    </a>
+  </div>
+
+  <div class="right__container">
+    <div
+      class="search "
+      adataClickOutside="searchActive"
+      (clickedOutside)="toggleSearch(false)"
+    >
+      <div *ngIf="searchActive" @ngIfWidth class="search__input">
+        <adata-search></adata-search>
+      </div>
+      <button class="icon__search" (click)="toggleSearch(true)">
+        <cle-icon name="zoom"></cle-icon>
+      </button>
+    </div>
+    <adata-navigation-panel></adata-navigation-panel>
+  </div>
+</div>

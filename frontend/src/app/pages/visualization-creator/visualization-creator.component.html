@@ -1,0 +1,141 @@
+<div class="form__container" [formGroup]="newVisualizationCreatorForm">
+  <div class="spacing">
+    <adata-form-select
+      class="select"
+      size="large"
+      [group]="newVisualizationCreatorForm"
+      controlName="matrix"
+      placeholder="Choose Data"
+      searchable="1"
+      bindLabel="name"
+      bindValue="id"
+      icon="c-add"
+      [inifiniteScrollConfig]="{
+        api: '/matrix/search',
+        pipe: generateMatrixName
+      }"
+      (change)="onAdd($event)"
+    >
+    </adata-form-select>
+    <adata-form-error
+      errorMessage="Please choose at least 1 data"
+      [force]="
+        visualization.matrices.length === 0 && newVisualizationCreatorForm.dirty
+      "
+    ></adata-form-error>
+  </div>
+  <div class="spacing">
+    <div
+      *ngIf="
+        visualization && visualization.x && visualization.y && !visualization.y2
+      "
+    >
+      <cle-button
+        value="Switch X and Y axis"
+        type="button"
+        long
+        (click)="swapXAndYAxis()"
+      ></cle-button>
+    </div>
+    <div
+      *ngIf="
+        visualization && visualization.x && visualization.y && visualization.y2
+      "
+    >
+      <cle-button
+        value="Switch Y and Y2 axis"
+        type="button"
+        long
+        (click)="swapYAndY2Axis()"
+      ></cle-button>
+    </div>
+  </div>
+  <div class="container__badge spacing">
+    <div
+      *ngFor="let mx of visualization.matrices; let index = index"
+      class="badge"
+    >
+      <adata-matrix-badge
+        [color]="mx.color"
+        [title]="mx.matrix.name"
+        (change)="onColorChanged($event, index)"
+        (remove)="onRemoveMatrix(index)"
+      ></adata-matrix-badge>
+    </div>
+  </div>
+  <div
+    *ngIf="0 !== visualization.matrices.length"
+    class="spacing visualization"
+  >
+    <adata-visualization
+      [visualization]="visualization"
+      interaction
+    ></adata-visualization>
+  </div>
+  <div
+    *ngIf="0 === visualization.matrices.length"
+    class="spacing visualization__mock__container"
+  >
+    <div class="attention__container">
+      <div class="attention__arrow">
+        <svg
+          class="attention__arrow__svg"
+          viewBox="0 0 232 269"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g class="attention__arrow__svg__g">
+            <path
+              d="M227 264C168.305 252.032 115.666 219.859 78.246 173.084C40.8248 126.308 20.9922 67.89 22.2 8"
+            />
+            <path d="M23 7L6.03229 23.5548" />
+            <path d="M22 7L38.7254 22.6471" />
+          </g>
+        </svg>
+      </div>
+      <div class="attention__text">Please choose your data...</div>
+    </div>
+
+    <div class="visualization__mock">
+      <adata-visualization-mock></adata-visualization-mock>
+    </div>
+  </div>
+  <div class="spacing input">
+    <adata-form-input
+      size="fill"
+      [group]="newVisualizationCreatorForm"
+      controlName="title"
+      placeholder="Title"
+    ></adata-form-input>
+  </div>
+  <div class="spacing textarea">
+    <adata-form-textarea
+      type="textarea"
+      size="fill"
+      [group]="newVisualizationCreatorForm"
+      controlName="description"
+      placeholder="Description"
+    >
+    </adata-form-textarea>
+  </div>
+  <div class="spacing">
+    <div
+      *ngIf="this.authService.getUser; else displayLogIn"
+      class="matrix-button"
+    >
+      <cle-button
+        icon="migration"
+        value="SAVE & PUBLISH"
+        type="button"
+        long
+        (click)="onSubmit()"
+      ></cle-button>
+    </div>
+
+    <ng-template #displayLogIn
+      ><div class="logInMessage">
+        Please log in, to save your visualization.
+      </div></ng-template
+    >
+  </div>
+</div>

@@ -1,0 +1,54 @@
+@import 'src/app/common/style/variables.scss';
+
+$spacing: $space30;
+
+.container {
+  &:not(.full-screen) {
+    padding: $spacing;
+  }
+
+  &.full-screen {
+    height: 100%;
+  }
+}
+
+.spacing {
+  margin-bottom: $spacing;
+}
+
+.title {
+  font-size: $fontSize36;
+  font-weight: $fontWeightBold;
+}
+
+.description {
+  width: 75%;
+
+  color: $colorFontGrey;
+}
+
+.visualization {
+  height: 70vh;
+
+  padding: $space20;
+
+  background-color: white;
+  border-radius: $sizeBorderRadius;
+}
+
+.full-screen .visualization {
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.visualization__mock {
+  position: relative;
+}
+
+.visualization__mock--cta {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}

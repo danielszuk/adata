@@ -1,0 +1,13 @@
+<div class="loader__container" [class.tiny]="tiny" [class.small]="small">
+  <div
+    class="loader"
+    [class.dark]="dark"
+    [class.light]="light"
+    [class.complete]="complete"
+    [class.failed]="failed"
+  >
+    <div *ngIf="!failed" class="loader__checkmark draw"></div>
+    <div *ngIf="failed" class="loader__failed__x"></div>
+  </div>
+  <div *ngIf="text" class="loader__text">{{ text }}</div>
+</div>

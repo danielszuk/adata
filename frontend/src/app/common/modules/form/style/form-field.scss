@@ -1,0 +1,117 @@
+@import 'src/app/common/style/variables';
+@import './sizes.scss';
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+$inputFontSize: $fontSizeNormal;
+$placholderFontColor: $colorFontGrey;
+
+.input-field {
+  max-width: 100%;
+  padding: 0 $sizeInputPadding;
+  background: transparent;
+  border: solid $sizeBorderThin $colorFontNormal;
+  border-radius: $sizeBorderRadius;
+  color: $colorFontNormal;
+  transition: border #{$transitionQuick};
+  height: $sizeButtonHeight;
+  line-height: $fontLineHeightNormal;
+  font-size: $fontSizeInput;
+  box-sizing: border-box;
+  transition: border #{$transitionQuick}, box-shadow #{$transitionQuick};
+
+  &:focus {
+    border-color: $colorPrimary;
+    outline: none;
+    box-shadow: $shadowLight;
+  }
+
+  &.invalid {
+    border-color: $colorDanger;
+  }
+
+  &.small {
+    width: $sizeInputWidth;
+  }
+
+  &.large {
+    width: $sizeInputWidthLong;
+  }
+
+  &.fill {
+    width: 100%;
+  }
+
+  &::placeholder {
+    color: $placholderFontColor;
+  }
+}
+
+// :not(.ng-select-filtered) for ng-select
+.input-field.empty:not(:focus):not(.ng-select-filtered)
+  ~ .input-label__container
+  .input-label {
+  top: $sizeButtonHeight / 2;
+  font-size: $inputFontSize;
+  background: rgba($colorBackground, 0);
+}
+
+.input-field:focus:not(.invalid) ~ .input-label__container .input-label {
+  color: $colorPrimary;
+}
+
+.input-field.invalid:not(.empty) ~ .input-label__container .input-label,
+.input-field.invalid:focus ~ .input-label__container .input-label {
+  color: $colorDanger;
+}
+
+.input-field--textarea {
+  width: 100%;
+}
+
+.input-field--ng-select.ng-select-opened ::ng-deep .ng-arrow {
+  transform: rotate(180deg);
+}
+
+.input-label__container {
+  position: relative;
+}
+
+$labelPadding: $space5;
+.input-label {
+  position: absolute;
+  top: 0;
+  left: $sizeInputPadding - $labelPadding;
+  transform: translateY(-50%);
+  display: inline-block;
+  padding: 0 $labelPadding;
+  background: rgba($colorBackground, 1);
+  border-radius: $sizeButtonHeight;
+  font-size: $fontSize12;
+  line-height: $sizeBorderThick;
+  color: $placholderFontColor;
+  transition: all #{$transitionQuick};
+}
+
+.icon__placeholder {
+  padding-left: $sizeIconSmall + 2 * $sizeInputPadding;
+}
+
+.icon__container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: $sizeInputPadding;
+  display: flex;
+  align-items: center;
+
+  color: $placholderFontColor;
+}
+
+.icon {
+  color: $colorPrimary;
+}

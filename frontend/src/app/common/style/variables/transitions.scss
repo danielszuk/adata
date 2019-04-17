@@ -1,0 +1,7 @@
+$transitionTimingQuick: 0.15s;
+$transitionTimingNormal: 0.3s;
+$transitionTimingSlow: 0.6s;
+
+$transitionQuick: $transitionTimingQuick ease-in-out;
+$transitionNormal: $transitionTimingNormal ease-in-out;
+$transitionSlow: $transitionTimingSlow ease-in-out;

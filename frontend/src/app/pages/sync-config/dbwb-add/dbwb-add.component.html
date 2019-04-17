@@ -1,0 +1,161 @@
+<div #mainContainer class="mainContainer">
+  <div class="container">
+    <div>
+      <div class="header"><h3>Add New Channel</h3></div>
+
+      <div class="form">
+        <div>
+          <form [formGroup]="channelSeriesForm">
+            <adata-form-input
+              (change)="generateUriFromCode()"
+              [group]="channelSeriesForm"
+              controlName="code"
+              label="Series Code"
+            ></adata-form-input>
+          </form>
+
+          <div class="form-field-ruler">
+            OR
+          </div>
+
+          <form [formGroup]="newSyncChannelForm" (submit)="add()">
+            <div class="form-field">
+              <adata-form-input
+                [group]="newSyncChannelForm"
+                controlName="apiUri"
+                size="large"
+                label="Api Uri"
+                errorMessageForbiddenValues="The specified Uri is already channeled."
+              ></adata-form-input>
+
+              <adata-form-error
+                errorMessage="
+                Haven't found any DataBankWorldBank API for the given Uri"
+                [force]="channelNotFound"
+              ></adata-form-error>
+            </div>
+
+            <div class="form-field">
+              <cle-button
+                (click)="getChannelInfo()"
+                value="Get Channel Info"
+                type="button"
+                icon="c-info"
+                [loader]="channelInfoLoader"
+              ></cle-button>
+            </div>
+
+            <div *ngIf="properties" @ngIfHeight>
+              <div class="form-field">
+                <adata-form-select
+                  [group]="newSyncChannelForm"
+                  controlName="interval"
+                  label="Interval"
+                  [items]="intervals"
+                ></adata-form-select>
+              </div>
+
+              <div class="form-field">
+                <adata-form-select
+                  [group]="newSyncChannelForm"
+                  controlName="uniqueNameQuery"
+                  label="Matrix ID Property"
+                  [items]="properties"
+                ></adata-form-select>
+
+                <adata-dbwb-channel-value-examples
+                  [group]="newSyncChannelForm"
+                  controlName="uniqueNameQuery"
+                  [results]="randomResults"
+                >
+                </adata-dbwb-channel-value-examples>
+              </div>
+
+              <div class="form-field">
+                <adata-form-select
+                  [group]="newSyncChannelForm"
+                  controlName="nameQuery"
+                  label="Matrix Name Property"
+                  [items]="properties"
+                ></adata-form-select>
+
+                <adata-dbwb-channel-value-examples
+                  [group]="newSyncChannelForm"
+                  controlName="nameQuery"
+                  [results]="randomResults"
+                >
+                </adata-dbwb-channel-value-examples>
+              </div>
+
+              <div class="form-field">
+                <adata-form-select
+                  [group]="newSyncChannelForm"
+                  controlName="dim1"
+                  label="Dimension 1"
+                  [items]="dimensions"
+                  searchable="1"
+                  bindLabel="name"
+                ></adata-form-select>
+              </div>
+
+              <div class="form-field">
+                <adata-form-select
+                  [group]="newSyncChannelForm"
+                  controlName="dim1Query"
+                  label="Dimension 1 Property"
+                  [items]="properties"
+                ></adata-form-select>
+
+                <adata-dbwb-channel-value-examples
+                  [group]="newSyncChannelForm"
+                  controlName="dim1Query"
+                  [results]="randomResults"
+                >
+                </adata-dbwb-channel-value-examples>
+              </div>
+
+              <div class="form-field">
+                <adata-form-select
+                  [group]="newSyncChannelForm"
+                  controlName="dim2"
+                  label="Dimension 2"
+                  [items]="dimensions"
+                  searchable="1"
+                  bindLabel="name"
+                ></adata-form-select>
+              </div>
+
+              <div class="form-field">
+                <adata-form-select
+                  [group]="newSyncChannelForm"
+                  controlName="dim2Query"
+                  label="Dimension 2 Property"
+                  [items]="properties"
+                ></adata-form-select>
+
+                <adata-dbwb-channel-value-examples
+                  [group]="newSyncChannelForm"
+                  controlName="dim2Query"
+                  [results]="randomResults"
+                >
+                </adata-dbwb-channel-value-examples>
+              </div>
+
+              <cle-button
+                value="Add Channel"
+                icon="c-add"
+                [loader]="addingNewChannelLoader"
+              ></cle-button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <adata-dbwb-channel-results
+    [totalResults]="totalResults"
+    [someResults]="randomResults"
+    (height)="addMainContainerPadding($event)"
+  ></adata-dbwb-channel-results>
+</div>

@@ -1,0 +1,23 @@
+@import 'src/app/common/style/variables';
+@import './style/nucleo.scss';
+
+.icon__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $sizeIcon;
+}
+
+.icon--small {
+  font-size: $sizeIconSmall;
+}
+
+.icon--medium {
+  font-size: $sizeIconMedium;
+}

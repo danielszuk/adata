@@ -1,0 +1,5 @@
+@import './common/style/variables.scss';
+
+.content:not(.no-header) {
+  padding-top: $sizeHeader;
+}

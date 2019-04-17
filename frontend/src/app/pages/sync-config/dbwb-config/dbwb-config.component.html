@@ -1,0 +1,16 @@
+<div class="container">
+  <div>
+    <div class="header">
+      <h3>Channels</h3>
+
+      <a routerLink="/sync-config/add-channel">
+        <div class="add__button">
+          <cle-button value="Add Channel" icon="c-add"></cle-button></div
+      ></a>
+    </div>
+
+    <div class="list">
+      <cle-list [list]="dbwbSyncs"></cle-list>
+    </div>
+  </div>
+</div>

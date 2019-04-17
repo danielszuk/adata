@@ -1,0 +1,67 @@
+@import 'src/app/common/style/variables';
+
+$buttonPadding: $space15;
+$buttonLoaderPadding: $space10;
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: $sizeButtonHeight;
+  padding: 0 $buttonPadding;
+
+  font-weight: $fontWeightBold;
+  font-size: $fontSize12;
+  color: $colorWhite;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  border-radius: $sizeBorderRadius;
+  box-shadow: $shadowLight;
+  background: $colorPrimary;
+
+  transition: box-shadow $transitionQuick, background $transitionQuick;
+
+  &.long {
+    padding: 0 $space40;
+  }
+
+  &.danger {
+    background: $colorDanger;
+  }
+
+  &.loading {
+    position: relative;
+    padding-left: $buttonPadding - $sizeLoaderTiny - $buttonLoaderPadding;
+    background: rgba($colorPrimary, 0);
+    color: $colorPrimary;
+    font-weight: $fontWeightSemiBold;
+    box-shadow: none !important;
+    cursor: auto;
+  }
+
+  &.loading-success {
+    color: $colorSuccess;
+  }
+}
+
+.button__loader {
+  padding-right: $buttonLoaderPadding;
+}
+
+.button__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: $space10;
+}
+
+:host-context(.device--mouse) .button:not(.hover-disabled) {
+  &:hover {
+    box-shadow: $shadowNormal;
+  }
+
+  &:active {
+    box-shadow: $shadowLight;
+  }
+}

@@ -1,0 +1,65 @@
+@import 'src/app/common/style/variables';
+
+.container {
+  z-index: $zIndexModal;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: $space30;
+  overflow: auto;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: rgba($colorBlack, $opacityOverlay);
+}
+
+$modalSpacing: $space30;
+.modal {
+  z-index: 1;
+  position: relative;
+
+  margin: auto;
+  padding: $modalSpacing;
+
+  background: $colorBackground;
+  border-radius: $sizeBorderRadius;
+}
+
+.modal__header {
+  margin-bottom: $space40;
+  padding: 0 $space10;
+
+  text-align: center;
+}
+
+.modal__header__title {
+  margin: 0;
+}
+
+.modal__close {
+  position: absolute;
+  right: $space10;
+  top: 23px;
+
+  color: $colorFontGrey;
+}
+
+.modal__content {
+  display: flex;
+  justify-content: center;
+
+  min-width: 300px;
+}

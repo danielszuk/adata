@@ -1,0 +1,19 @@
+<button class="container" [type]="type || 'submit'">
+  <div
+    class="button"
+    [class.hover-disabled]="disableHover"
+    [class.long]="long"
+    [class.danger]="danger"
+    [class.loading]="anyLoading"
+    [class.loading-success]="anyLoadingSuccess"
+  >
+    <div class="button__loader" *ngIf="anyLoading">
+      <cle-loader [complete]="anyLoadingSuccess" tiny="1"></cle-loader>
+    </div>
+    <div *ngIf="icon && !anyLoading" class="button__icon">
+      <cle-icon [name]="icon" small="1"></cle-icon>
+    </div>
+
+    {{ value }}
+  </div>
+</button>

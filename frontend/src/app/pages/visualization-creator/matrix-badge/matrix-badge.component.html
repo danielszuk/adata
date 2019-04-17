@@ -1,0 +1,14 @@
+<div class="container" [style.border-color]="getColorCode">
+  <div class="title" [style.color]="getColorCode">
+    {{ sliceString }}
+  </div>
+  <div class="color-picker">
+    <adata-color-picker
+      [color]="color"
+      (change)="changeColor($event)"
+    ></adata-color-picker>
+  </div>
+  <button class="remove" (click)="removeById()">
+    <cle-icon name="i-remove" small></cle-icon>
+  </button>
+</div>

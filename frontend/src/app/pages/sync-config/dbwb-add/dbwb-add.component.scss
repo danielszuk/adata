@@ -1,0 +1,33 @@
+@import 'src/app/common/style/variables';
+
+.container {
+  display: flex;
+  justify-content: center;
+
+  margin: 0 auto;
+  padding: 0 $space40 $space40;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+
+  margin: $space40 0;
+}
+
+.form {
+  padding: $space30;
+
+  border-radius: $sizeBorderRadius;
+  background: $colorBackground;
+}
+
+.form-field {
+  margin-bottom: $space30;
+}
+
+.form-field-ruler {
+  margin: $space10 0;
+
+  font-size: $fontSize12;
+}
