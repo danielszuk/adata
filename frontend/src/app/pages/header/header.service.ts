@@ -15,7 +15,7 @@ export class HeaderService implements OnDestroy {
     private readonly location: Location
   ) {
     // Make header visible defaultly for every route (if a route set hidden, the next route set back)
-    const lastPath = this.location.path();
+    let lastPath = this.location.path();
     this.routerSubscription = this.router.events.subscribe(ev => {
       if (ev instanceof RoutesRecognized) {
         const currentPath = this.location.path();
@@ -23,6 +23,7 @@ export class HeaderService implements OnDestroy {
           if (this.hidden) {
             this.hidden = false;
           }
+          lastPath = currentPath;
         }
       }
     });
