@@ -20,7 +20,7 @@ import { generateMatrixName } from 'src/app/common/modules/visualization/visuali
   styleUrls: ['./visualization-creator.component.scss']
 })
 export class VisualizationCreatorComponent implements OnInit {
-  public newVisualizationCreatorForm: FormGroup;
+  protected newVisualizationCreatorForm: FormGroup;
   public loading = true;
   public maxNumOfMatrices = false;
   public isFormValid = true;
@@ -35,12 +35,13 @@ export class VisualizationCreatorComponent implements OnInit {
     y2: null
   };
   public generateMatrixName = generateMatrixName;
+  public edit = false;
 
   constructor(
-    private readonly httpService: HttpService,
-    private fb: FormBuilder,
+    protected readonly httpService: HttpService,
+    protected fb: FormBuilder,
     public readonly authService: AuthService,
-    private readonly router: Router
+    protected readonly router: Router
   ) {}
 
   async ngOnInit() {
@@ -247,4 +248,6 @@ export class VisualizationCreatorComponent implements OnInit {
     this.swapYAndY2Dimensions();
     this.cloneVisualization();
   }
+
+  public updateVisualization() {}
 }

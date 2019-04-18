@@ -123,13 +123,43 @@
       *ngIf="this.authService.getUser; else displayLogIn"
       class="matrix-button"
     >
-      <cle-button
-        icon="migration"
-        value="SAVE & PUBLISH"
-        type="button"
-        long
-        (click)="onSubmit()"
-      ></cle-button>
+      <div *ngIf="!edit; else editComponent">
+        <cle-button
+          icon="migration"
+          value="SAVE & PUBLISH"
+          type="button"
+          long
+          (click)="onSubmit()"
+        ></cle-button>
+      </div>
+      <ng-template #editComponent>
+        <div
+          *ngIf="
+            visualization &&
+              visualization.user &&
+              visualization.user.id &&
+              visualization.user.id === authService.getUser.id;
+            else publishAndSave
+          "
+        >
+          <cle-button
+            icon="migration"
+            value="UPDATE"
+            type="button"
+            long
+            (click)="updateVisualization()"
+          ></cle-button>
+        </div>
+        <ng-template #publishAndSave>
+          <cle-button
+            icon="migration"
+            value="SAVE & PUBLISH"
+            type="button"
+            long
+            (click)="onSubmit()"
+          ></cle-button>
+        </ng-template>
+      </ng-template>
     </div>
 
     <ng-template #displayLogIn
