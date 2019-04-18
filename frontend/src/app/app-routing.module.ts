@@ -34,9 +34,9 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'edit-visualization',
+    path: 'edit',
     loadChildren:
-      'src/app/pages/visualization-edit/visualization-edit.module#VisualizationEditModule',
+      'src/app/pages/visualization-creator/visualization-edit/visualization-edit.module#VisualizationEditModule',
     canActivate: [AuthGuard]
   },
   {

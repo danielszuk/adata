@@ -8,6 +8,8 @@ import { Pagination } from '../util/typeorm/pagination';
 import { MatrixEntity } from '../matrix/matrix.entity';
 import { UserEntity } from '../user/user.entity';
 import { VisualizationMatrixEntity } from './visualization.matirx/visualization.matrix.entity';
+import { IVisualizationDomainDTO } from 'src/shared/modules/visualization/visualization.dto';
+import { VisualizationMatrixDomain } from './visualization.matirx/visualization.matrix.domain';
 
 @Injectable()
 export class VisualizationService {
@@ -62,6 +64,7 @@ export class VisualizationService {
       .select('v.id')
       .addSelect('v.title')
       .addSelect('v.description')
+      .leftJoinAndSelect('v.user', 'user')
       .leftJoinAndSelect('v.matrices', 'matrices')
       .leftJoinAndSelect('matrices.matrix', 'matrix')
       .leftJoinAndSelect('matrix.values', 'values')
@@ -137,5 +140,47 @@ export class VisualizationService {
         : undefined;
     }
     return searchItems;
+  }
+
+  public async putVisualization(
+    visualization: VisualizationDomain,
+    user: UserEntity,
+  ): Promise<any | VisualizationEntity> {
+    visualization.matrices.forEach(visualizationMatrix => {
+      console.log(visualizationMatrix.matrix.name);
+    });
+    const updateVisualization = await this.visualizationRepository.findOne(
+      {
+        id: visualization.id,
+      },
+      { relations: ['user'] },
+    );
+    if (updateVisualization.user.id === user.id) {
+      console.log('update');
+      visualization.matrices = await this.updateVisualizationMatrices(
+        visualization,
+      );
+      return await this.visualizationRepository.save(visualization);
+    } else {
+      console.log('create');
+      visualization.id = undefined;
+      return await this.createVisualization(visualization, user);
+    }
+  }
+
+  private async updateVisualizationMatrices(
+    visualization: VisualizationDomain,
+  ): Promise<VisualizationMatrixEntity[]> {
+    await getRepository(VisualizationMatrixEntity).delete({ visualization });
+    const updateArray: VisualizationMatrixDomain[] = [];
+    visualization.matrices.forEach(eachVm => {
+      const vm = new VisualizationMatrixEntity();
+      const m = new MatrixEntity();
+      m.id = eachVm.matrix.id;
+      vm.matrix = m;
+      vm.color = eachVm.color;
+      updateArray.push(vm);
+    });
+    return await getRepository(VisualizationMatrixEntity).save(updateArray);
   }
 }

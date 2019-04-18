@@ -11,6 +11,7 @@ import {
   HttpStatus,
   UseGuards,
   Req,
+  Put,
 } from '@nestjs/common';
 
 import { VisualizationService } from './visualization.service';
@@ -71,11 +72,38 @@ export class VisualizationController {
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    description: `Haven't found any visualization with given ID.`,
+    description: `No visualization with given ID.`,
   })
   async getVisualization(
     @Param('id', new ParseIntPipe()) id: number,
   ): Promise<IVisualizationDomainDTO> {
     return await this.visualizationService.getVisualization(id);
+  }
+
+  @Put()
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description:
+      'Visualization was updated with given ID, if ID is not provided visualization is created',
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Invalid visualization ID',
+  })
+  @UseGuards(JwtAuthGuard)
+  async putVisualization(
+    @Body() visualization: VisualizationDomain,
+    @Req() request,
+  ): Promise<any | IVisualizationDomainDTO> {
+    if (typeof visualization.id !== 'number') {
+      throw new HttpException(
+        'Invalid visualization ID',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    return this.visualizationService.putVisualization(
+      visualization,
+      request.user,
+    );
   }
 }
