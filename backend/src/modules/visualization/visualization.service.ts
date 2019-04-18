@@ -1,5 +1,5 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, createQueryBuilder } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { VisualizationEntity } from './visualization.entity';
@@ -146,9 +146,7 @@ export class VisualizationService {
     visualization: VisualizationDomain,
     user: UserEntity,
   ): Promise<any | VisualizationEntity> {
-    visualization.matrices.forEach(visualizationMatrix => {
-      console.log(visualizationMatrix.matrix.name);
-    });
+    visualization.matrices.forEach(visualizationMatrix => {});
     const updateVisualization = await this.visualizationRepository.findOne(
       {
         id: visualization.id,
@@ -156,13 +154,11 @@ export class VisualizationService {
       { relations: ['user'] },
     );
     if (updateVisualization.user.id === user.id) {
-      console.log('update');
       visualization.matrices = await this.updateVisualizationMatrices(
         visualization,
       );
       return await this.visualizationRepository.save(visualization);
     } else {
-      console.log('create');
       visualization.id = undefined;
       return await this.createVisualization(visualization, user);
     }
@@ -182,5 +178,26 @@ export class VisualizationService {
       updateArray.push(vm);
     });
     return await getRepository(VisualizationMatrixEntity).save(updateArray);
+  }
+
+  public async deleteVisualization(
+    id: number,
+    user: UserEntity,
+  ): Promise<boolean> {
+    const v = await this.visualizationRepository.findOne(
+      { id },
+      { relations: ['user'] },
+    );
+    if (!v) {
+      return false;
+    }
+    if (v.user.id === user.id) {
+      await getRepository(VisualizationMatrixEntity).delete({
+        visualization: { id },
+      });
+      return await !!this.visualizationRepository.delete({ id });
+    } else {
+      return false;
+    }
   }
 }

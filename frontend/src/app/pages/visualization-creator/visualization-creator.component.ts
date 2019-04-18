@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpService } from 'src/app/core/http.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { IVisualizationDomainDTO } from 'src/shared/modules/visualization/visualization.dto';
@@ -13,6 +13,7 @@ import { Colors } from 'src/shared/enums/colors.enum';
 import { MarkAllControlsTouched } from '../../common/modules/form/utils/mark-all-controls-touched';
 import { IDimensionDTO } from 'src/shared/modules/dimension/dimension.dto';
 import { generateMatrixName } from 'src/app/common/modules/visualization/visualization-util/visualization-util.generate-chart-names';
+import { ModalComponent } from 'src/app/common/modules/modal/modal.component';
 
 @Component({
   selector: 'adata-visualization-creator',
@@ -36,6 +37,10 @@ export class VisualizationCreatorComponent implements OnInit {
   };
   public generateMatrixName = generateMatrixName;
   public edit = false;
+
+  public removeModalTitle: string;
+  @ViewChild('removeVisualizationModal')
+  removeVisualizationModal: ModalComponent;
 
   constructor(
     protected readonly httpService: HttpService,
@@ -250,4 +255,14 @@ export class VisualizationCreatorComponent implements OnInit {
   }
 
   public updateVisualization() {}
+
+  public openRemoveModal() {
+    this.removeVisualizationModal.open();
+  }
+
+  public closeRemoveModal() {
+    this.removeVisualizationModal.close();
+  }
+
+  public removeVisualization() {}
 }

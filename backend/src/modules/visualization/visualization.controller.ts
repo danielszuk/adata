@@ -12,6 +12,7 @@ import {
   UseGuards,
   Req,
   Put,
+  Delete,
 } from '@nestjs/common';
 
 import { VisualizationService } from './visualization.service';
@@ -101,9 +102,30 @@ export class VisualizationController {
         HttpStatus.BAD_REQUEST,
       );
     }
-    return this.visualizationService.putVisualization(
+    return await this.visualizationService.putVisualization(
       visualization,
       request.user,
     );
+  }
+
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Visualization removed',
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: `Visualization wasn't found.`,
+  })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: `Forbidden to remove visualization`,
+  })
+  async deleteVisualization(
+    @Param('id', new ParseIntPipe()) id: number,
+    @Req() req,
+  ): Promise<boolean> {
+    return await this.visualizationService.deleteVisualization(id, req.user);
   }
 }

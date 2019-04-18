@@ -166,7 +166,7 @@
         class="cancel__button"
         [routerLink]="['/', 'visualization', visualization.id]"
       >
-        <cle-button value="CANCEL" type="button"></cle-button>
+        <cle-button value="CANCEL EDITING" type="button"></cle-button>
       </a>
     </div>
     <div *ngIf="!authService.getUser && edit">
@@ -174,5 +174,36 @@
         Please log in, to save your visualization.
       </div>
     </div>
+  </div>
+  <div
+    *ngIf="
+      edit &&
+      authService.getUser &&
+      visualization.user &&
+      authService.getUser.id === visualization.user.id
+    "
+    class="spacing"
+  >
+    <cle-button
+      type="button"
+      danger="1"
+      value="Remove"
+      (click)="openRemoveModal()"
+    ></cle-button>
+
+    <cle-modal #removeVisualizationModal [title]="removeModalTitle">
+      <cle-button
+        type="button"
+        value="Remove"
+        danger="1"
+        (click)="removeVisualization()"
+      ></cle-button>
+      <cle-button
+        class="cancel__button"
+        type="button"
+        value="Nope"
+        (click)="closeRemoveModal()"
+      ></cle-button>
+    </cle-modal>
   </div>
 </div>

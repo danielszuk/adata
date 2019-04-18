@@ -20,6 +20,8 @@ export class VisualizationEditComponent extends VisualizationCreatorComponent
   implements OnInit {
   public visualizationIdParam: number;
   public edit = true;
+  public removeModalTitle =
+    'Are you sure you want to remove this visualization?';
 
   constructor(
     httpService: HttpService,
@@ -89,6 +91,15 @@ export class VisualizationEditComponent extends VisualizationCreatorComponent
         this.visualization
       );
       this.router.navigate([`visualization`, res.id]);
+    }
+  }
+
+  public async removeVisualization() {
+    const res = await this.httpService.delete(
+      `/visualization/${this.visualization.id}`
+    );
+    if (res) {
+      this.router.navigate(['/', 'browser']);
     }
   }
 }

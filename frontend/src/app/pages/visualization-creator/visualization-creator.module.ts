@@ -10,6 +10,7 @@ import { CommonDirectivesModule } from 'src/app/common/directives/common-directi
 import { MatrixBadgeComponent } from './matrix-badge/matrix-badge.component';
 import { ColorPickerModule } from 'src/app/common/components/color-picker/color-picker.module';
 import { VisualizationEditComponent } from './visualization-edit/visualization-edit.component';
+import { ModalModule } from 'src/app/common/modules/modal/modal.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { VisualizationEditComponent } from './visualization-edit/visualization-e
     CommonComponentsModule,
     CommonDirectivesModule,
     FormModule,
-    ColorPickerModule
+    ColorPickerModule,
+    ModalModule
   ]
 })
 export class VisualizationCreatorModule {}
