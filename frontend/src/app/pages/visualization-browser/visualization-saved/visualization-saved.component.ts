@@ -29,8 +29,6 @@ export class VisualizationSavedComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    console.log('ya');
-
     this.activatedRoute.queryParams.subscribe(async params => {
       if (0 < params.page) {
         this.page = params.page;
