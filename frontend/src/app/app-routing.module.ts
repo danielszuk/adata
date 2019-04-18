@@ -34,6 +34,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'edit-visualization',
+    loadChildren:
+      'src/app/pages/visualization-edit/visualization-edit.module#VisualizationEditModule',
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'auth/callback/:jwt',
     component: AuthCallbackComponent
   },
