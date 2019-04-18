@@ -5,4 +5,5 @@
 export interface IConfig {
   backendUrl: string;
   inputTimeoutBeforeServerCall: number;
+  facebookAppId: string;
 }

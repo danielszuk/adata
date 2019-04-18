@@ -6,14 +6,19 @@ import { VisualizationDetailsRoutingModule } from './visualization-details-routi
 import { VisualizationModule } from 'src/app/common/modules/visualization/visualization.module';
 import { CommonComponentsModule } from 'src/app/common/components/common-components.module';
 import { VisualizationDetailsFullScreenComponent } from './visualization-details-full-screen/visualization-details-full-screen.component';
+import { SocialModule } from '../../common/modules/social/social.module';
 
 @NgModule({
-  declarations: [VisualizationDetailsComponent, VisualizationDetailsFullScreenComponent],
+  declarations: [
+    VisualizationDetailsComponent,
+    VisualizationDetailsFullScreenComponent
+  ],
   imports: [
     CommonModule,
     VisualizationDetailsRoutingModule,
     VisualizationModule,
-    CommonComponentsModule
+    CommonComponentsModule,
+    SocialModule
   ]
 })
 export class VisualizationDetailsModule {}

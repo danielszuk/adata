@@ -6,6 +6,11 @@
     <div *ngIf="!fullScreen" class="description spacing">
       {{ visualization.description }}
     </div>
+
+    <div class="spacing">
+      <adata-fb-like></adata-fb-like>
+    </div>
+
     <div class="visualization">
       <adata-visualization
         [visualization]="visualization"
