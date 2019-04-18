@@ -29,6 +29,7 @@ $spacing: $space20;
 .link {
   height: $sizeHeader;
   padding: $spacing;
+  box-sizing: border-box;
 
   font-weight: $fontWeightSemiBold;
 }
