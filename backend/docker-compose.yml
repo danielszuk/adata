@@ -48,7 +48,8 @@ services:
     expose:
       - ${API_PORT}
     volumes:
-      - ./src:/usr/src/app/src
+      - ./:/usr/src/app/
+      - /usr/src/app/node_modules/
     links:
       - postgres:postgres
     depends_on:
