@@ -26,10 +26,13 @@ export class VisualizationCreatorComponent implements OnInit {
   public isFormValid = true;
   public visualization: IVisualizationDomainDTO = {
     id: null,
-
     matrices: [],
     description: '',
-    title: ''
+    title: '',
+    user: null,
+    x: null,
+    y: null,
+    y2: null
   };
   public generateMatrixName = generateMatrixName;
   public edit = false;
