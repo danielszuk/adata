@@ -50,7 +50,10 @@
         </li>
 
         <li *ngIf="authService.getUser" class="navigation-list__elem ">
-          <a routerLink="/my-visualizations" routerLinkActive="active">
+          <a
+            [routerLink]="['browser', 'my-visualizations']"
+            routerLinkActive="active"
+          >
             MY VISUALIZATIONS
           </a>
         </li>

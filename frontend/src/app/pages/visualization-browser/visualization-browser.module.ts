@@ -6,9 +6,10 @@ import { VisualizationBrowserComponent } from './visualization-browser.component
 import { VisualizationBrowserRoutingModule } from 'src/app/pages/visualization-browser/visualization-browser-routing.module';
 import { VisualizationModule } from 'src/app/common/modules/visualization/visualization.module';
 import { PaginationModule } from 'src/app/common/modules/pagination/pagination.module';
+import { VisualizationSavedComponent } from './visualization-saved/visualization-saved.component';
 
 @NgModule({
-  declarations: [VisualizationBrowserComponent],
+  declarations: [VisualizationBrowserComponent, VisualizationSavedComponent],
   imports: [
     CommonModule,
     VisualizationBrowserRoutingModule,

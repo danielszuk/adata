@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 
 import { HttpService } from 'src/app/core/http.service';
 import { IVisualizationDomainDTO } from 'src/shared/modules/visualization/visualization.dto';
-import { TruncateText } from '../../common/utils/truncate-text';
 import { ActivatedRoute } from '@angular/router';
-import { VisualizationResponseAndCount } from '../visualization-browser/visualization-browser.component';
 import { WindowService } from 'src/app/common/services/window.service';
 import { generateVisualizationMatrixName } from 'src/app/common/modules/visualization/visualization-util/visualization-util.generate-chart-names';
+import { TruncateText } from 'src/app/common/utils/truncate-text';
+import { VisualizationResponseAndCount } from '../visualization-browser.component';
 
 @Component({
   selector: 'adata-visualization-saved',
-  templateUrl: './visualization-saved.component.html',
-  styleUrls: ['./visualization-saved.component.scss']
+  templateUrl: '../visualization-browser.component.html',
+  styleUrls: ['../visualization-browser.component.scss']
 })
 export class VisualizationSavedComponent implements OnInit {
   public loading = true;
@@ -29,6 +29,8 @@ export class VisualizationSavedComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    console.log('ya');
+
     this.activatedRoute.queryParams.subscribe(async params => {
       if (0 < params.page) {
         this.page = params.page;
