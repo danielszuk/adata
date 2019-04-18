@@ -1,3 +1,4 @@
+import { Logger } from '../util/logger';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Repository, getRepository, createQueryBuilder } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -10,6 +11,10 @@ import { UserEntity } from '../user/user.entity';
 import { VisualizationMatrixEntity } from './visualization.matirx/visualization.matrix.entity';
 import { IVisualizationDomainDTO } from 'src/shared/modules/visualization/visualization.dto';
 import { VisualizationMatrixDomain } from './visualization.matirx/visualization.matrix.domain';
+import Axios from 'axios';
+import { Env } from '../util/env/variables';
+
+const logger = new Logger('visualization.service');
 
 @Injectable()
 export class VisualizationService {
@@ -35,7 +40,15 @@ export class VisualizationService {
     vDomain.matrices = await getRepository(VisualizationMatrixEntity).save(
       vmArray,
     );
-    return await this.visualizationRepository.save(vDomain);
+
+    const visualization = await this.visualizationRepository.save(vDomain);
+    await Axios.get(
+      `${Env.CRAWLER_URL}/visualization/${visualization.id}/screen-shot`,
+    ).catch(error => {
+      logger.error(error);
+    });
+
+    return visualization;
   }
 
   async getVisualizations(p: Pagination): Promise<any> {
