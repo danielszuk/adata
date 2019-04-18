@@ -12,7 +12,7 @@ const routes: Routes = [
       'src/app/pages/visualization-browser/visualization-browser.module#VisualizationBrowserModule'
   },
   {
-    path: 'creator',
+    path: 'visualization',
     loadChildren:
       'src/app/pages/visualization-creator/visualization-creator.module#VisualizationCreatorModule'
   },
@@ -31,12 +31,6 @@ const routes: Routes = [
     path: 'my-visualizations',
     loadChildren:
       'src/app/pages/visualization-saved/visualization-saved.module#VisualizationSavedModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'edit',
-    loadChildren:
-      'src/app/pages/visualization-creator/visualization-edit/visualization-edit.module#VisualizationEditModule',
     canActivate: [AuthGuard]
   },
   {

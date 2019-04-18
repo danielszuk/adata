@@ -14,6 +14,11 @@
       ></adata-visualization>
     </div>
   </div>
+  <div *ngIf="!fullScreen && visualization">
+    <a [routerLink]="['/', 'visualization', visualization.id, 'edit']"
+      ><cle-button value="Edit Visualization" type="button"></cle-button
+    ></a>
+  </div>
   <ng-template #loading>
     <div class="flex-center container-gutter">
       <cle-loader text="Loading visualization..."></cle-loader>

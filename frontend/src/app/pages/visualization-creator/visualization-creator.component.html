@@ -119,11 +119,40 @@
     </adata-form-textarea>
   </div>
   <div class="spacing">
-    <div
-      *ngIf="this.authService.getUser; else displayLogIn"
-      class="matrix-button"
-    >
-      <div *ngIf="!edit; else editComponent">
+    <div *ngIf="authService.getUser && !edit">
+      <cle-button
+        icon="migration"
+        value="SAVE & PUBLISH"
+        type="button"
+        long
+        (click)="onSubmit()"
+      ></cle-button>
+    </div>
+    <div *ngIf="!authService.getUser && !edit">
+      <div class="logInMessage">
+        Please log in, to save your visualization.
+      </div>
+    </div>
+  </div>
+  <div class="spacing">
+    <div class="edit__button--group" *ngIf="edit && visualization">
+      <div
+        *ngIf="
+          authService.getUser &&
+            visualization.user &&
+            authService.getUser.id === visualization.user.id;
+          else saveVisualization
+        "
+      >
+        <cle-button
+          icon="migration"
+          value="UPDATE"
+          type="button"
+          long
+          (click)="updateVisualization()"
+        ></cle-button>
+      </div>
+      <ng-template #saveVisualization>
         <cle-button
           icon="migration"
           value="SAVE & PUBLISH"
@@ -131,41 +160,19 @@
           long
           (click)="onSubmit()"
         ></cle-button>
-      </div>
-      <ng-template #editComponent>
-        <div
-          *ngIf="
-            visualization &&
-              visualization.user &&
-              visualization.user.id &&
-              visualization.user.id === authService.getUser.id;
-            else publishAndSave
-          "
-        >
-          <cle-button
-            icon="migration"
-            value="UPDATE"
-            type="button"
-            long
-            (click)="updateVisualization()"
-          ></cle-button>
-        </div>
-        <ng-template #publishAndSave>
-          <cle-button
-            icon="migration"
-            value="SAVE & PUBLISH"
-            type="button"
-            long
-            (click)="onSubmit()"
-          ></cle-button>
-        </ng-template>
       </ng-template>
+      <a
+        *ngIf="visualization && visualization.id"
+        class="cancel__button"
+        [routerLink]="['/', 'visualization', visualization.id]"
+      >
+        <cle-button value="CANCEL" type="button"></cle-button>
+      </a>
     </div>
-
-    <ng-template #displayLogIn
-      ><div class="logInMessage">
+    <div *ngIf="!authService.getUser && edit">
+      <div class="logInMessage">
         Please log in, to save your visualization.
-      </div></ng-template
-    >
+      </div>
+    </div>
   </div>
 </div>

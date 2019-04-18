@@ -25,14 +25,11 @@ export class VisualizationCreatorComponent implements OnInit {
   public maxNumOfMatrices = false;
   public isFormValid = true;
   public visualization: IVisualizationDomainDTO = {
-    matrices: [],
     id: null,
+
+    matrices: [],
     description: '',
-    title: '',
-    user: null,
-    x: null,
-    y: null,
-    y2: null
+    title: ''
   };
   public generateMatrixName = generateMatrixName;
   public edit = false;

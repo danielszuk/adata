@@ -112,3 +112,12 @@ $spacingStDesktop: $space20;
 
   text-align: left;
 }
+
+.edit__button--group {
+  display: flex;
+  flex-direction: row;
+}
+
+.cancel__button {
+  margin-left: $spacing;
+}

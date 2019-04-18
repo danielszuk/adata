@@ -41,7 +41,10 @@
         </li>
 
         <li class="navigation-list__elem mobile">
-          <a routerLink="/creator" routerLinkActive="active">
+          <a
+            [routerLink]="['visualization', 'create']"
+            routerLinkActive="active"
+          >
             CREATOR
           </a>
         </li>
