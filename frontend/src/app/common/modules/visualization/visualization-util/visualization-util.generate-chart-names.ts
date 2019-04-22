@@ -23,7 +23,7 @@ export function generateChartDimensions(
   const dim1Value = `${dim1Name} ${dim1Unit}`;
   const dim2Name = dim2.name;
   const dim2Value = `${dim2Name} ${dim2Unit}`;
-  return `- ${dim1Value} / ${dim2Value}`;
+  return ` - ${dim1Value} / ${dim2Value}`;
 }
 
 export function generateChartNames(
@@ -39,7 +39,7 @@ export function generateChartNames(
 export function generateVisualizationMatrixName(
   visualization: IVisualizationDomainDTO
 ): IVisualizationDomainDTO {
-  for (let vm of visualization.matrices) {
+  for (const vm of visualization.matrices) {
     vm.matrix.name = generateMatrixName(vm.matrix, true);
   }
   return visualization;
