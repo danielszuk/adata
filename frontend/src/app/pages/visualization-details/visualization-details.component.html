@@ -1,4 +1,13 @@
 <div class="container" [class.full-screen]="fullScreen">
+  <a [routerLink]="['/browser']">
+    <div class="go-back">
+      <div class="go-back__icon">
+        <cle-icon name="arrow-w"></cle-icon>
+      </div>
+
+      <div class="go-back__text">back to browser</div>
+    </div></a
+  >
   <div *ngIf="visualization; else loading">
     <div *ngIf="!fullScreen" class="title spacing">
       {{ visualization.title }}
