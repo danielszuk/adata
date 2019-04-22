@@ -40,7 +40,7 @@ $modalSpacing: $space30;
 
 .modal__header {
   margin-bottom: $space40;
-  padding: 0 $space10;
+  padding: 0 $space20;
 
   text-align: center;
 }
@@ -52,7 +52,7 @@ $modalSpacing: $space30;
 .modal__close {
   position: absolute;
   right: $space10;
-  top: 23px;
+  top: 26px;
 
   color: $colorFontGrey;
 }

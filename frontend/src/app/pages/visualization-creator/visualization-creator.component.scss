@@ -118,6 +118,31 @@ $spacingStDesktop: $space20;
   flex-direction: row;
 }
 
-.cancel__button {
-  margin-left: $spacing;
+.axe-switch {
+  margin-bottom: $space5;
+
+  color: $colorPrimary;
+}
+.axe-switch__button {
+  text-transform: uppercase;
+}
+
+.remove-button {
+  color: $colorDanger;
+  text-transform: uppercase;
+  font-weight: $fontWeightSemiBold;
+}
+
+.cancel__remove {
+  margin-left: $space15;
+}
+
+.log-in-message {
+  margin-top: $space5;
+
+  font-weight: $fontWeightBold;
+}
+.log-in-message__cta {
+  text-transform: uppercase;
+  color: $colorPrimary;
 }

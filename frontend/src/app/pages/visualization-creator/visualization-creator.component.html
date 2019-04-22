@@ -1,4 +1,4 @@
-<div class="form__container" [formGroup]="newVisualizationCreatorForm">
+<div class="form__container">
   <div class="spacing">
     <adata-form-select
       class="select"
@@ -24,32 +24,7 @@
       "
     ></adata-form-error>
   </div>
-  <div class="spacing">
-    <div
-      *ngIf="
-        visualization && visualization.x && visualization.y && !visualization.y2
-      "
-    >
-      <cle-button
-        value="Switch X and Y axis"
-        type="button"
-        long
-        (click)="swapXAndYAxis()"
-      ></cle-button>
-    </div>
-    <div
-      *ngIf="
-        visualization && visualization.x && visualization.y && visualization.y2
-      "
-    >
-      <cle-button
-        value="Switch Y and Y2 axis"
-        type="button"
-        long
-        (click)="swapYAndY2Axis()"
-      ></cle-button>
-    </div>
-  </div>
+
   <div class="container__badge spacing">
     <div
       *ngFor="let mx of visualization.matrices; let index = index"
@@ -63,15 +38,45 @@
       ></adata-matrix-badge>
     </div>
   </div>
-  <div
-    *ngIf="0 !== visualization.matrices.length"
-    class="spacing visualization"
-  >
-    <adata-visualization
-      [visualization]="visualization"
-      interaction
-    ></adata-visualization>
+
+  <div class="spacing">
+    <div
+      *ngIf="
+        visualization && visualization.x && visualization.y && !visualization.y2
+      "
+      class="axe-switch"
+    >
+      <button
+        class="axe-switch__button"
+        type="button"
+        (click)="swapXAndYAxis()"
+      >
+        Switch X and Y axis
+      </button>
+    </div>
+    <div
+      *ngIf="
+        visualization && visualization.x && visualization.y && visualization.y2
+      "
+      class="axe-switch"
+    >
+      <button
+        class="axe-switch__button"
+        type="button"
+        (click)="swapXAndYAxis()"
+      >
+        Switch Y and Y2 axis
+      </button>
+    </div>
+
+    <div *ngIf="0 !== visualization.matrices.length" class="visualization">
+      <adata-visualization
+        [visualization]="visualization"
+        interaction
+      ></adata-visualization>
+    </div>
   </div>
+
   <div
     *ngIf="0 === visualization.matrices.length"
     class="spacing visualization__mock__container"
@@ -118,22 +123,26 @@
     >
     </adata-form-textarea>
   </div>
+
   <div class="spacing">
     <div *ngIf="authService.getUser && !edit">
       <cle-button
         icon="migration"
         value="SAVE & PUBLISH"
         type="button"
+        [disabled]="!authService.getUser && !edit"
         long
         (click)="onSubmit()"
       ></cle-button>
     </div>
     <div *ngIf="!authService.getUser && !edit">
-      <div class="logInMessage">
-        Please log in, to save your visualization.
+      <div class="log-in-message">
+        Please <span class="log-in-message__cta">sign in</span>, to save your
+        visualization.
       </div>
     </div>
   </div>
+
   <div class="spacing">
     <div class="edit__button--group" *ngIf="edit && visualization">
       <div
@@ -148,6 +157,7 @@
           icon="migration"
           value="UPDATE"
           type="button"
+          [disabled]="!authService.getUser && edit"
           long
           (click)="updateVisualization()"
         ></cle-button>
@@ -157,24 +167,30 @@
           icon="migration"
           value="SAVE & PUBLISH"
           type="button"
+          [disabled]="!authService.getUser && edit"
           long
           (click)="onSubmit()"
         ></cle-button>
       </ng-template>
-      <a
-        *ngIf="visualization && visualization.id"
-        class="cancel__button"
-        [routerLink]="['/', 'visualization', visualization.id]"
-      >
-        <cle-button value="CANCEL EDITING" type="button"></cle-button>
-      </a>
     </div>
     <div *ngIf="!authService.getUser && edit">
-      <div class="logInMessage">
-        Please log in, to save your visualization.
+      <div class="log-in-message">
+        Please <span class="log-in-message__cta">sign in</span>, to save your
+        visualization.
       </div>
     </div>
   </div>
+
+  <div class="spacing">
+    <a
+      *ngIf="visualization && visualization.id"
+      class="cancel__button"
+      [routerLink]="['/', 'visualization', visualization.id]"
+    >
+      <cle-button value="cancel" type="button" neutral></cle-button>
+    </a>
+  </div>
+
   <div
     *ngIf="
       edit &&
@@ -184,12 +200,9 @@
     "
     class="spacing"
   >
-    <cle-button
-      type="button"
-      danger="1"
-      value="Remove"
-      (click)="openRemoveModal()"
-    ></cle-button>
+    <button class="remove-button" type="button" (click)="openRemoveModal()">
+      Remove
+    </button>
 
     <cle-modal #removeVisualizationModal [title]="removeModalTitle">
       <cle-button
@@ -199,9 +212,10 @@
         (click)="removeVisualization()"
       ></cle-button>
       <cle-button
-        class="cancel__button"
+        class="cancel__remove"
         type="button"
         value="Nope"
+        neutral
         (click)="closeRemoveModal()"
       ></cle-button>
     </cle-modal>
