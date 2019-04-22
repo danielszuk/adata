@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpService } from 'src/app/core/http.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { IVisualizationDomainDTO } from 'src/shared/modules/visualization/visualization.dto';
@@ -13,6 +13,7 @@ import { Colors } from 'src/shared/enums/colors.enum';
 import { MarkAllControlsTouched } from '../../common/modules/form/utils/mark-all-controls-touched';
 import { IDimensionDTO } from 'src/shared/modules/dimension/dimension.dto';
 import { generateMatrixName } from 'src/app/common/modules/visualization/visualization-util/visualization-util.generate-chart-names';
+import { ModalComponent } from 'src/app/common/modules/modal/modal.component';
 
 @Component({
   selector: 'adata-visualization-creator',
@@ -20,13 +21,13 @@ import { generateMatrixName } from 'src/app/common/modules/visualization/visuali
   styleUrls: ['./visualization-creator.component.scss']
 })
 export class VisualizationCreatorComponent implements OnInit {
-  public newVisualizationCreatorForm: FormGroup;
+  protected newVisualizationCreatorForm: FormGroup;
   public loading = true;
   public maxNumOfMatrices = false;
   public isFormValid = true;
   public visualization: IVisualizationDomainDTO = {
-    matrices: [],
     id: null,
+    matrices: [],
     description: '',
     title: '',
     user: null,
@@ -35,12 +36,17 @@ export class VisualizationCreatorComponent implements OnInit {
     y2: null
   };
   public generateMatrixName = generateMatrixName;
+  public edit = false;
+
+  public removeModalTitle: string;
+  @ViewChild('removeVisualizationModal')
+  removeVisualizationModal: ModalComponent;
 
   constructor(
-    private readonly httpService: HttpService,
-    private fb: FormBuilder,
+    protected readonly httpService: HttpService,
+    protected fb: FormBuilder,
     public readonly authService: AuthService,
-    private readonly router: Router
+    protected readonly router: Router
   ) {}
 
   async ngOnInit() {
@@ -247,4 +253,16 @@ export class VisualizationCreatorComponent implements OnInit {
     this.swapYAndY2Dimensions();
     this.cloneVisualization();
   }
+
+  public updateVisualization() {}
+
+  public openRemoveModal() {
+    this.removeVisualizationModal.open();
+  }
+
+  public closeRemoveModal() {
+    this.removeVisualizationModal.close();
+  }
+
+  public removeVisualization() {}
 }
