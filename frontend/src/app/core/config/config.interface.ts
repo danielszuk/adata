@@ -4,6 +4,6 @@
 //  3. Change assets / config / config.json
 export interface IConfig {
   backendUrl: string;
+  appUrl: string;
   inputTimeoutBeforeServerCall: number;
-  facebookAppId: string;
 }

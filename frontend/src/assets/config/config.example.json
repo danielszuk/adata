@@ -1,5 +1,5 @@
 {
   "backendUrl": "<URL of backend excluding trailing slash>",
-  "inputTimeoutBeforeServerCall": "<milisecs after input changes and before server call>",
-  "facebookAppId": "<Facbook App ID>"
+  "appUrl": "<URL of app excluding trailing slash>",
+  "inputTimeoutBeforeServerCall": "<milisecs after input changes and before server call>"
 }
