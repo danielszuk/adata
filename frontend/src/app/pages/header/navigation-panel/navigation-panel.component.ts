@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class NavigationPanelComponent implements OnInit, OnDestroy {
   protected sidenavOpen: boolean;
-  protected dropdownActive = false;
+  protected dropdownActive: boolean;
 
   private routerSubscription: Subscription;
 
@@ -22,7 +22,9 @@ export class NavigationPanelComponent implements OnInit, OnDestroy {
     if (window) {
       this.routerSubscription = this.router.events.subscribe(ev => {
         if (ev instanceof NavigationEnd) {
-          this.setSidenavOpen(false);
+          if (this.sidenavOpen) {
+            this.setSidenavOpen(false);
+          }
         }
       });
     }

@@ -180,7 +180,7 @@ export class VisualizationCreatorComponent implements OnInit {
     if (0 === this.visualization.matrices.length) {
       return;
     }
-    for (let m of this.visualization.matrices) {
+    for (const m of this.visualization.matrices) {
       const dim1Index = m.matrix.dim1.id;
       const dim2Index = m.matrix.dim2.id;
       if (-1 === axisIndexes.indexOf(dim1Index)) {
@@ -215,6 +215,7 @@ export class VisualizationCreatorComponent implements OnInit {
   public async onSubmit() {
     const formStatus = this.newVisualizationCreatorForm.status;
     MarkAllControlsTouched(this.newVisualizationCreatorForm);
+    console.log(this.newVisualizationCreatorForm);
     if ('VALID' === formStatus) {
       this.isFormValid = true;
     } else if ('INVALID' === formStatus) {

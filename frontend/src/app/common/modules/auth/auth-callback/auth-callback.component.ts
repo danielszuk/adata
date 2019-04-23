@@ -5,6 +5,7 @@ import { LocalStorageService } from 'src/app/core/local-storage/local.storage.se
 import { LocalStorageKey } from 'src/app/core/local-storage/local.storage.key';
 import { JwtService } from '../jwt/jwt.service';
 import { AuthService } from '../auth.service';
+import { HeaderService } from '../../../../pages/header/header.service';
 
 @Component({
   selector: 'adata-auth-callback',
@@ -19,8 +20,11 @@ export class AuthCallbackComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly jwtService: JwtService,
     private readonly localStorageService: LocalStorageService,
-    private readonly authService: AuthService
-  ) {}
+    private readonly authService: AuthService,
+    private readonly header: HeaderService
+  ) {
+    this.header.hide();
+  }
 
   ngOnInit() {
     this.paramSubscription = this.activetedRoute.paramMap.subscribe(params => {

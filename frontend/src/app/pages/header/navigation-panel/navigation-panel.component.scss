@@ -19,15 +19,17 @@ $spacing: $space20;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-
   height: 100%;
 }
 .hamburger {
+  height: $sizeHeader;
   padding: $space10;
   cursor: pointer;
 }
 .link {
+  height: $sizeHeader;
   padding: $spacing;
+  box-sizing: border-box;
 
   font-weight: $fontWeightSemiBold;
 }
@@ -72,6 +74,10 @@ $spacing: $space20;
 
   background-color: $colorWhite;
   box-shadow: $shadowLight;
+}
+
+.sidenav__control {
+  height: 100%;
 }
 
 .navigation-list__container {

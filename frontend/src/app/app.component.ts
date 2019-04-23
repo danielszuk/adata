@@ -29,8 +29,9 @@ export class AppComponent implements OnInit, OnDestroy {
           const currentPath = this.location.path();
           if (currentPath !== lastPath) {
             window.scrollTo(0, 0);
-            lastPath = currentPath;
           }
+
+          lastPath = currentPath;
         }
       });
     }

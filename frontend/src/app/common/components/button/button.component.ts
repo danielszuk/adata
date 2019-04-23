@@ -8,7 +8,7 @@ import { Loader } from '../../utils/loader';
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss']
 })
-export class ButtonComponent implements OnInit, OnChanges {
+export class ButtonComponent implements OnInit {
   constructor() {}
 
   @Input() value: string;
@@ -17,6 +17,8 @@ export class ButtonComponent implements OnInit, OnChanges {
 
   @Input() long: boolean;
   @Input() danger: boolean;
+  @Input() neutral: boolean;
+  @Input() disabled: boolean;
 
   @Input() disableHover: boolean;
 
@@ -26,13 +28,11 @@ export class ButtonComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     Required(this.value);
-  }
-
-  ngOnChanges() {
-    Required(this.value);
     this.disableHover = EmptyBoolean(this.disableHover);
     this.long = EmptyBoolean(this.long);
     this.danger = EmptyBoolean(this.danger);
+    this.neutral = EmptyBoolean(this.neutral);
+    this.disabled = EmptyBoolean(this.disabled);
   }
 
   public get anyLoading(): boolean {

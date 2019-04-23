@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from 'src/app/core/http.service';
 import { IVisualizationDomainDTO } from 'src/shared/modules/visualization/visualization.dto';
+// tslint:disable-next-line:max-line-length
 import { generateVisualizationMatrixName } from 'src/app/common/modules/visualization/visualization-util/visualization-util.generate-chart-names';
 import { VisualizationCreatorComponent } from '../visualization-creator.component';
 import { FormBuilder } from '@angular/forms';

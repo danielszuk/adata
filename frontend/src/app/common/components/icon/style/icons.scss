@@ -15,6 +15,7 @@ $icon-zoom: unicode(ea0d);
 $icon-pen-2: unicode(ea0f);
 $icon-c-question: unicode(ea11);
 $icon-c-info: unicode(ea12);
+$icon-arrow-w: unicode(ea13);
 
 .icon-single-03::before {
   content: $icon-single-03;
@@ -54,5 +55,9 @@ $icon-c-info: unicode(ea12);
 
 .icon-c-info::before {
   content: $icon-c-info;
+}
+
+.icon-arrow-w::before {
+  content: $icon-arrow-w;
 }
 

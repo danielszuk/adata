@@ -5,6 +5,9 @@ $spacing: $space30;
 .container {
   &:not(.full-screen) {
     padding: $spacing;
+    @media #{$bp-st-desktop} {
+      padding: $space20;
+    }
   }
 
   &.full-screen {
@@ -52,4 +55,20 @@ $spacing: $space30;
   left: 50%;
 
   transform: translate(-50%, -50%);
+}
+
+.go-back {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: $space10;
+
+  color: $colorPrimary;
+}
+
+.go-back__text {
+  margin-left: $space10;
+
+  text-transform: uppercase;
+  font-weight: $fontWeightBold;
 }

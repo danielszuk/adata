@@ -30,6 +30,16 @@ $buttonLoaderPadding: $space10;
     background: $colorDanger;
   }
 
+  &.neutral {
+    background: $colorGreyDark;
+    color: $colorWhite;
+  }
+
+  &.disabled {
+    background: $colorGreyDark;
+    color: $colorGrey;
+  }
+
   &.loading {
     position: relative;
     padding-left: $buttonPadding - $sizeLoaderTiny - $buttonLoaderPadding;
