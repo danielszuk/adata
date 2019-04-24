@@ -17,7 +17,7 @@ const {
   GOOGLE_ADMIN_EMAILS,
 } = process.env;
 export const Env = {
-  DEV: !!DEV,
+  DEV: DEV === 'true',
   APP_TYPES: APP_TYPES.split('|') as string[],
   POSTGRES_HOST,
   POSTGRES_USER,
