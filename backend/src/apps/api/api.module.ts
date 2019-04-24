@@ -17,7 +17,7 @@ import { Env } from '../../modules/util/env/variables';
       username: Env.POSTGRES_USER,
       password: Env.POSTGRES_PASSWORD,
       database: Env.POSTGRES_DB,
-      entities: ['../../**/**.entity{.ts,.js}'],
+      entities: [Env.DEV ? 'src/**/**.entity.ts' : '**/**.entity.js'],
       synchronize: true,
     }),
     MatrixModule,

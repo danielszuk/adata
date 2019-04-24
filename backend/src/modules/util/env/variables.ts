@@ -1,4 +1,5 @@
 const {
+  DEV,
   APP_TYPES,
   POSTGRES_HOST,
   POSTGRES_USER,
@@ -16,6 +17,7 @@ const {
   GOOGLE_ADMIN_EMAILS,
 } = process.env;
 export const Env = {
+  DEV: !!DEV,
   APP_TYPES: APP_TYPES.split('|') as string[],
   POSTGRES_HOST,
   POSTGRES_USER,
