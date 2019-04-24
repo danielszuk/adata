@@ -10,7 +10,7 @@ export class ConfigService {
 
   public init(): Promise<void> {
     return this.http
-      .get<IConfig>('/assets/config/config.json')
+      .get<IConfig>('/config/config.json')
       .toPromise()
       .then(config => {
         this._config = config;
