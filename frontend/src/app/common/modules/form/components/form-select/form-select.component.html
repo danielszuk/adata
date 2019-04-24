@@ -17,14 +17,13 @@
     [class.icon__placeholder]="icon"
     [bindLabel]="bindLabel"
     [bindValue]="bindValue"
-    [virtualScroll]="infiniteScroll"
     [loading]="loading || infiniteScrollAPILoading"
     (scrollToEnd)="onScrollToEnd()"
     (search)="onSearch($event)"
     (clear)="onClear()"
     (change)="onChange($event)"
   >
-    <ng-template *ngIf="infiniteScroll" ng-header-tmp>
+    <ng-template *ngIf="inifiniteScrollConfig" ng-header-tmp>
       <small
         >Loaded
         {{
