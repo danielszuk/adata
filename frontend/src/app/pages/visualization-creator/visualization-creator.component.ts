@@ -21,7 +21,7 @@ import { ModalComponent } from 'src/app/common/modules/modal/modal.component';
   styleUrls: ['./visualization-creator.component.scss']
 })
 export class VisualizationCreatorComponent implements OnInit {
-  protected newVisualizationCreatorForm: FormGroup;
+  public newVisualizationCreatorForm: FormGroup;
   public loading = true;
   public maxNumOfMatrices = false;
   public isFormValid = true;
@@ -43,10 +43,10 @@ export class VisualizationCreatorComponent implements OnInit {
   removeVisualizationModal: ModalComponent;
 
   constructor(
-    protected readonly httpService: HttpService,
-    protected fb: FormBuilder,
+    public readonly httpService: HttpService,
+    public fb: FormBuilder,
     public readonly authService: AuthService,
-    protected readonly router: Router
+    public readonly router: Router
   ) {}
 
   async ngOnInit() {

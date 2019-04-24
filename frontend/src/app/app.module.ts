@@ -24,6 +24,14 @@ const appInitializerFn = (
   };
 };
 
+export function tokenGetter(): string {
+  if (localStorage) {
+    return localStorage.getItem(LocalStorageKey.JWT);
+  } else {
+    return undefined;
+  }
+}
+
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
   imports: [
@@ -36,9 +44,7 @@ const appInitializerFn = (
     HttpClientModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return localStorage.getItem(LocalStorageKey.JWT);
-        }
+        tokenGetter
       }
     })
   ],

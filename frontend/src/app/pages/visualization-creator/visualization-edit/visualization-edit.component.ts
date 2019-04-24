@@ -29,7 +29,7 @@ export class VisualizationEditComponent extends VisualizationCreatorComponent
     fb: FormBuilder,
     authService: AuthService,
     router: Router,
-    protected activetedRoute: ActivatedRoute
+    public activetedRoute: ActivatedRoute
   ) {
     super(httpService, fb, authService, router);
   }

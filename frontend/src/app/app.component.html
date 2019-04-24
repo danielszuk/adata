@@ -3,7 +3,7 @@
   [class.device--mouse]="deviceService.isMouse"
   [class.device--touch]="deviceService.isTouch"
 >
-  <adata-header *ngIf="!noHeader"></adata-header>
+  <adata-header></adata-header>
   <div class="content" [class.no-header]="!header.visible">
     <router-outlet></router-outlet>
   </div>

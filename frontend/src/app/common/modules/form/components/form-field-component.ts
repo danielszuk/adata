@@ -22,13 +22,13 @@ export class FormFieldComponent {
   errorMessageFieldRequired: string;
   @Input() errorMessageForbiddenValues: string;
 
-  protected valueChangesSub: Subscription;
+  public valueChangesSub: Subscription;
 
-  protected validator: ValidationErrors;
+  public validator: ValidationErrors;
 
   constructor() {}
 
-  protected NgOnInit() {
+  public NgOnInit() {
     this.autofocus = EmptyBoolean(this.autofocus);
     const control = this.group.controls[this.controlName];
 
@@ -71,12 +71,12 @@ export class FormFieldComponent {
     }
   }
 
-  protected NgAfterViewInit() {
+  public NgAfterViewInit() {
     if (this.autofocus) {
       this.input.nativeElement.focus();
     }
   }
-  protected NgOnDestroy() {
+  public NgOnDestroy() {
     if (this.valueChangesSub) {
       this.valueChangesSub.unsubscribe();
     }
