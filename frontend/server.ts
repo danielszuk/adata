@@ -1,3 +1,6 @@
+import * as Dotenv from 'dotenv-safe';
+Dotenv.config();
+
 // These are important and needed before anything else
 import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
@@ -6,7 +9,7 @@ import * as express from 'express';
 import * as helmet from 'helmet';
 import { join } from 'path';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.FE_PORT || 3000;
 const APP_NAME = 'adata';
 const DIST_FOLDER = join(process.cwd() + `/${APP_NAME}`);
 
