@@ -14,7 +14,7 @@ import { VisualizationResponseAndCount } from '../visualization-browser.componen
   styleUrls: ['../visualization-browser.component.scss']
 })
 export class VisualizationSavedComponent implements OnInit {
-  public loading = true;
+  public visualizationLoading = true;
   public visualizations: IVisualizationDomainDTO[];
   public numberOfVisualizations: number;
   public count: number;
@@ -32,17 +32,17 @@ export class VisualizationSavedComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(async params => {
       if (0 < params.page) {
         this.page = params.page;
-        if (!this.loading) {
+        if (!this.visualizationLoading) {
           await this.getData();
         }
       }
     });
     await this.getData();
-    this.loading = false;
+    this.visualizationLoading = false;
   }
 
   private async getData() {
-    this.loading = true;
+    this.visualizationLoading = true;
     const response = await this.http.get<VisualizationResponseAndCount>(
       `/visualization/my-visualization?page=${this.page || 1}`
     );
@@ -51,7 +51,7 @@ export class VisualizationSavedComponent implements OnInit {
       generateVisualizationMatrixName(visualization)
     );
     this.count = response[1];
-    this.loading = false;
+    this.visualizationLoading = false;
     this.windowService.scrollToTop();
   }
 }
