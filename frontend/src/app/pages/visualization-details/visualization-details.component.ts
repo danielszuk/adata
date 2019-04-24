@@ -11,7 +11,7 @@ import { generateVisualizationMatrixName } from 'src/app/common/modules/visualiz
   styleUrls: ['./visualization-details.component.scss']
 })
 export class VisualizationDetailsComponent implements OnInit {
-  protected visualization: IVisualizationDomainDTO;
+  public visualization: IVisualizationDomainDTO;
   public fullScreen: boolean;
 
   constructor(

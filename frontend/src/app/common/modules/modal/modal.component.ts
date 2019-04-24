@@ -37,8 +37,8 @@ import { Transitions } from '../../style/variables/transitions';
   ]
 })
 export class ModalComponent implements OnInit {
-  protected display: boolean;
-  protected visible: boolean;
+  public display: boolean;
+  public visible: boolean;
 
   constructor() {}
 
@@ -55,7 +55,7 @@ export class ModalComponent implements OnInit {
     this.visible = false;
   }
 
-  protected animationDone(event: AnimationEvent) {
+  public animationDone(event: AnimationEvent) {
     // If modal is faded out, remove from Dom
     if (event.toState === 'void') {
       this.display = false;

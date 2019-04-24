@@ -11,12 +11,12 @@ import { Subscription } from 'rxjs';
   animations: [Animations.ngIfWidth]
 })
 export class NavigationPanelComponent implements OnInit, OnDestroy {
-  protected sidenavOpen: boolean;
-  protected dropdownActive: boolean;
+  public sidenavOpen: boolean;
+  public dropdownActive: boolean;
 
   private routerSubscription: Subscription;
 
-  constructor(protected authService: AuthService, private router: Router) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     if (window) {
@@ -36,7 +36,7 @@ export class NavigationPanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected setSidenavOpen(b: boolean) {
+  public setSidenavOpen(b: boolean) {
     this.sidenavOpen = b;
   }
 
