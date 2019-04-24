@@ -1,3 +1,15 @@
+<cle-meta property="og:title" [content]="visualization.title"></cle-meta>
+<cle-meta
+  property="og:description"
+  [content]="visualization.description"
+></cle-meta>
+<cle-meta
+  property="og:image"
+  [content]="
+    'https://visualizations.adata.codelise.io/' + visualization.id + '.jpg'
+  "
+></cle-meta>
+
 <div class="container" [class.full-screen]="fullScreen">
   <a *ngIf="!fullScreen" [routerLink]="['/browser']">
     <div class="go-back">
