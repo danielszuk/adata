@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Logger } from 'src/modules/util/logger';
 import * as AWS from 'aws-sdk';
 import { Env } from '../../util/env';
+import { Logger } from '../../util/logger';
 
 const logger = new Logger('AwsS3Service');
 
