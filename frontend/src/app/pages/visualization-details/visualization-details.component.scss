@@ -42,7 +42,10 @@ $spacing: $space30;
 
 .full-screen .visualization {
   height: 100vh;
+  margin-bottom: 0;
+
   box-sizing: border-box;
+  border-radius: 0;
 }
 
 .visualization__mock {

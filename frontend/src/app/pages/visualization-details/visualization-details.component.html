@@ -1,5 +1,5 @@
 <div class="container" [class.full-screen]="fullScreen">
-  <a [routerLink]="['/browser']">
+  <a *ngIf="!fullScreen" [routerLink]="['/browser']">
     <div class="go-back">
       <div class="go-back__icon">
         <cle-icon name="arrow-w"></cle-icon>
@@ -16,7 +16,7 @@
       {{ visualization.description }}
     </div>
 
-    <div class="spacing">
+    <div *ngIf="!fullScreen" class="spacing">
       <adata-fb-like></adata-fb-like>
     </div>
 
