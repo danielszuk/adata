@@ -8,10 +8,9 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-import { JwtAuthGuard } from './jwt/jwt.guard';
-import { Env } from 'src/modules/util/env/variables';
 import { ApiResponse } from '@nestjs/swagger';
 import { JwtAdminGuard } from './jwt/jwt.admin.guard';
+import { Env } from '../../util/env/variables';
 
 export const AuthUrl = 'auth';
 export const AuthGoogleCallbackUrl = 'google/callback';

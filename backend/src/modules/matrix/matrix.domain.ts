@@ -1,2 +1,3 @@
-import { MatrixDomain } from 'src/shared/modules/matrix/matrix.domain';
+import { MatrixDomain } from '../../shared/modules/matrix/matrix.domain';
+
 export { MatrixDomain };

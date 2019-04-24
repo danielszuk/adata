@@ -1,7 +1,6 @@
 import { Repository, getRepository, In } from 'typeorm';
-
-import { MatrixEntity } from 'src/modules/matrix/matrix.entity';
-import { ValueEntity } from 'src/modules/matrix/value/value.entity';
+import { MatrixEntity } from '../../matrix/matrix.entity';
+import { ValueEntity } from '../../matrix/value/value.entity';
 
 export default async (
   matrixEntityArrayInDatabase: MatrixEntity[],

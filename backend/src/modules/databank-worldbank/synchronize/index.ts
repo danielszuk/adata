@@ -1,13 +1,13 @@
-import { GetAPIData } from 'src/modules/util/axios/index';
 import { DataBankWorldBankEntity } from '../databank-worldbank.entity';
 import FetchByUniqueName from './fetchByUniqueName.dbwb';
 import GetMatrixEntityArray from './getMatrixEntityArray.dbwb';
 import { CONSTANTS } from '../databank-worldbank.constants';
 import RemoveValues from './removeValues.dbwb';
 import InsertValues from './insertValues.dbwb';
-import { Logger } from 'src/modules/util/logger';
-import { MatrixEntity } from 'src/modules/matrix/matrix.entity';
 import { IdbwbResponseInfo } from '../databank-worldbank.service';
+import { Logger } from '../../util/logger';
+import { MatrixEntity } from '../../matrix/matrix.entity';
+import { GetAPIData } from '../../util/axios';
 
 const logger = new Logger('Databank-Worldbank-sync');
 

@@ -7,10 +7,10 @@ import {
 } from 'typeorm';
 
 import { MatrixDomain } from './matrix.domain';
-import { ValueEntity } from 'src/modules/matrix/value/value.entity';
 import { DataBankWorldBankEntity } from '../databank-worldbank/databank-worldbank.entity';
 import { DimensionEntity } from '../dimension/dimension.entity';
 import { VisualizationMatrixEntity } from '../visualization/visualization.matirx/visualization.matrix.entity';
+import { ValueEntity } from './value/value.entity';
 
 @Entity('matrix')
 export class MatrixEntity extends MatrixDomain {

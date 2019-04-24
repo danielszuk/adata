@@ -1,2 +1,3 @@
-import { ValueDomain } from 'src/shared/modules/matrix/value/value.domain';
+import { ValueDomain } from '../../../shared/modules/matrix/value/value.domain';
+
 export { ValueDomain };

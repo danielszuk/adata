@@ -5,8 +5,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../user.entity';
 import { GoogleEntity } from './google/google.entity';
-import { Env } from 'src/modules/util/env/variables';
 import { JwtPayload } from './jwt/jwt.payload';
+import { Env } from '../../util/env/variables';
 
 @Injectable()
 export class AuthService {

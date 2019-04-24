@@ -9,8 +9,8 @@ import {
 
 import { DataBankWorldBankDomain } from './databank-worldbank.domain';
 import { MatrixEntity } from '../matrix/matrix.entity';
-import { DataBankWorldBankDomainIntervals } from 'src/shared/modules/databank-worldbank/databank-worldbank.domain';
 import { DimensionEntity } from '../dimension/dimension.entity';
+import { DataBankWorldBankDomainIntervals } from '../../shared/modules/databank-worldbank/databank-worldbank.domain';
 
 @Entity('databank_wordbank')
 export class DataBankWorldBankEntity extends DataBankWorldBankDomain {

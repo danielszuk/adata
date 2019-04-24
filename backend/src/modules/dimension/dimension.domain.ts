@@ -1,2 +1,3 @@
-import { DimensionDomain } from 'src/shared/modules/dimension/dimension.domain';
+import { DimensionDomain } from '../../shared/modules/dimension/dimension.domain';
+
 export { DimensionDomain };

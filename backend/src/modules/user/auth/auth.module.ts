@@ -4,12 +4,12 @@ import { JwtModule } from '@nestjs/jwt';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { Env } from 'src/modules/util/env/variables';
 import { GoogleStrategy } from './google/google.strategy';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from '../user.entity';
 import { GoogleEntity } from './google/google.entity';
 import { JwtStrategy } from './jwt/jwt.strategy';
+import { Env } from '../../util/env/variables';
 
 @Module({
   imports: [

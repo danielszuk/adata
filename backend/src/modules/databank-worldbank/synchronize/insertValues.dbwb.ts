@@ -1,10 +1,10 @@
 import jsonQuery from 'json-query';
 
-import { MatrixEntity } from 'src/modules/matrix/matrix.entity';
-import { DataBankWorldBankEntity } from '../databank-worldbank.entity';
-import { ValueEntity } from 'src/modules/matrix/value/value.entity';
 import InsertMatrix from './insertMatrix.dbwb';
 import { Repository, getRepository } from 'typeorm';
+import { MatrixEntity } from '../../matrix/matrix.entity';
+import { DataBankWorldBankEntity } from '../databank-worldbank.entity';
+import { ValueEntity } from '../../matrix/value/value.entity';
 
 export default async (
   jsonDataArray: any,

@@ -1,10 +1,10 @@
-import { App } from 'src/apps/app';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe, Logger } from '@nestjs/common';
 
-import { ApiModule } from 'src/apps/api/api.module';
 import startApiSwagger from './api.swagger';
 import { Env } from '../../modules/util/env/variables';
+import { App } from '../app';
+import { ApiModule } from './api.module';
 
 export class ApiApp extends App {
   constructor() {

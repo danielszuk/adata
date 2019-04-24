@@ -9,7 +9,6 @@ import { Pagination } from '../util/typeorm/pagination';
 import { MatrixEntity } from '../matrix/matrix.entity';
 import { UserEntity } from '../user/user.entity';
 import { VisualizationMatrixEntity } from './visualization.matirx/visualization.matrix.entity';
-import { IVisualizationDomainDTO } from 'src/shared/modules/visualization/visualization.dto';
 import { VisualizationMatrixDomain } from './visualization.matirx/visualization.matrix.domain';
 import Axios from 'axios';
 import { Env } from '../util/env/variables';

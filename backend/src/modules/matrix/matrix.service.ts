@@ -3,7 +3,6 @@ import { Repository, In } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MatrixEntity } from './matrix.entity';
 import { Pagination } from '../util/typeorm/pagination';
-import { IMatrixDomainDTO } from 'src/shared/modules/matrix/matrix.dto';
 
 Injectable();
 export class MatrixService {
@@ -19,7 +18,7 @@ export class MatrixService {
         .select()
         .leftJoinAndSelect('matrix.dim1', 'dim1')
         .leftJoinAndSelect('matrix.dim2', 'dim2')
-        //.orderBy('RANDOM()')
+        // .orderBy('RANDOM()')
         .skip(p.skip)
         .take(p.take)
         .getManyAndCount();
@@ -84,5 +83,5 @@ export class MatrixService {
     return await this.matrixRepository.find({
       where: { id: In([...idArray]) },
     });
-  };
+  }
 }

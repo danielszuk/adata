@@ -5,7 +5,7 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { UserEntity } from 'src/modules/user/user.entity';
+import { UserEntity } from '../../user.entity';
 
 @Entity('user_google_profile')
 export class GoogleEntity {

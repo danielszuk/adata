@@ -1,7 +1,7 @@
 import { Injectable, ExecutionContext } from '@nestjs/common';
 
 import { JwtAuthGuard } from './jwt.guard';
-import { Env } from 'src/modules/util/env/variables';
+import { Env } from '../../../util/env/variables';
 
 @Injectable()
 export class JwtAdminGuard extends JwtAuthGuard {

@@ -1,6 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { Server } from 'http';
-import { Logger } from 'src/modules/util/logger';
+import { Logger } from '../modules/util/logger';
 
 export abstract class App {
   public readonly name: string;

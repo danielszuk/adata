@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
-import { MatrixEntity } from 'src/modules/matrix/matrix.entity';
 import { ValueDomain } from './value.domain';
+import { MatrixEntity } from '../matrix.entity';
 
 @Entity('value')
 export class ValueEntity extends ValueDomain {

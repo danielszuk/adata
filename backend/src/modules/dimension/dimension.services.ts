@@ -2,10 +2,10 @@ import { Injectable, HttpStatus, Inject, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MatrixService } from '../matrix/matrix.service';
-import { SaveWithWithUniqueValidation } from 'src/modules/util/validation/save-with-unique-validation';
 import { DimensionEntity } from './dimension.entity';
 import { DimensionDomain } from './dimension.domain';
 import { IDimensionDTO } from '../../shared/modules/dimension/dimension.dto';
+import { SaveWithWithUniqueValidation } from '../util/validation/save-with-unique-validation';
 
 @Injectable()
 export class DimensionService {

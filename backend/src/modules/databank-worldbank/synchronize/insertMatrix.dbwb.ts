@@ -1,7 +1,7 @@
 import { Repository, getRepository } from 'typeorm';
 
 import { DataBankWorldBankEntity } from '../databank-worldbank.entity';
-import { MatrixEntity } from 'src/modules/matrix/matrix.entity';
+import { MatrixEntity } from '../../matrix/matrix.entity';
 
 export default async (
   dbwbEntity: DataBankWorldBankEntity,

@@ -4,12 +4,13 @@ import { Repository } from 'typeorm';
 
 import { DataBankWorldBankEntity } from './databank-worldbank.entity';
 import startSync from './synchronize/index';
-import { DataBankWorldBankDomain } from 'src/modules/databank-worldbank/databank-worldbank.domain';
-import { SaveWithWithUniqueValidation } from 'src/modules/util/validation/save-with-unique-validation';
+
 import { IDataBankWorldBankDTO } from '../../shared/modules/databank-worldbank/databank-worldbank.dto';
 import { IChannelInfoDTO } from '../../shared/dtos/channel-info.dto';
 import { GetAPIData } from '../util/axios';
 import { ForEach } from '../util/for-each';
+import { DataBankWorldBankDomain } from './databank-worldbank.domain';
+import { SaveWithWithUniqueValidation } from '../util/validation/save-with-unique-validation';
 
 export interface IdbwbResponseInfo {
   page: number;
