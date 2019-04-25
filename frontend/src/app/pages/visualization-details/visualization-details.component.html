@@ -1,9 +1,15 @@
-<cle-meta property="og:title" [content]="visualization.title"></cle-meta>
 <cle-meta
+  *ngIf="visualization"
+  property="og:title"
+  [content]="visualization.title"
+></cle-meta>
+<cle-meta
+  *ngIf="visualization"
   property="og:description"
   [content]="visualization.description"
 ></cle-meta>
 <cle-meta
+  *ngIf="visualization"
   property="og:image"
   [content]="
     'https://visualizations.adata.codelise.io/' + visualization.id + '.jpg'
