@@ -62,10 +62,12 @@ export const generateToolTip = (
       }
     }
   });
-  const tableHeaderName = `<tr><td colspan="2">${x.name} ${
+  const tableHeaderName = `<tr><td colspan="2">${!!x.name ? x.name : ''} ${
     !!x.unit ? x.unit : ''
   }</td></tr>`;
-  const tableHeaderValue = `<tr><th colspan="2">${targetX}</th></tr>`;
+  const tableHeaderValue = `<tr><th colspan="2">${
+    !!targetX ? targetX : ''
+  }</th></tr>`;
 
   return `
     <div class="c3-tooltip-container--inner">
@@ -73,7 +75,7 @@ export const generateToolTip = (
         <tbody>
           ${tableHeaderName}
           ${tableHeaderValue}
-          <tr><td>${y.name} ${y.unit}</td></tr>
+          <tr><td>${!!y.name ? y.name : ''} ${!!y.unit ? y.unit : ''}</td></tr>
           ${targetsDomY}
           ${
             !!y2
@@ -129,8 +131,8 @@ function generateToolTipRow(target, color, num, name): string {
   return `<tr class="c3-tooltip-name--${target.id}">
         <td class="value">
           <div class="value__container"  style="color:${color(target)}">
-          <div  class="value__name">${name}: </div>
-            <div>${num} ${name}</div>
+          <div  class="value__name">${!!name ? name : ''}: </div>
+            <div>${!!num ? num : ''} ${!!name ? name : ''}</div>
           </div>
         </td>
       </tr>`;
