@@ -60,7 +60,6 @@ export class MetaComponent implements OnChanges, OnDestroy {
       metaTag.property = this.property;
     }
 
-    Required(this.content);
     if (this.content) {
       metaTag.content = this.content;
     }
