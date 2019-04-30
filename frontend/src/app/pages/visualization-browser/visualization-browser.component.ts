@@ -6,7 +6,7 @@ import { VisualizationBrowserSearchService } from 'src/app/common/services/visua
 import { WindowService } from 'src/app/common/services/window.service';
 import { TruncateText } from '../../common/utils/truncate-text';
 import { generateVisualizationMatrixName } from 'src/app/common/modules/visualization/visualization-util/visualization-util.generate-chart-names';
-import { color } from 'd3';
+import { IPagination } from '../../common/modules/pagination/pagination.component';
 
 export type VisualizationResponseAndCount = [IVisualizationDomainDTO[], number];
 
@@ -18,10 +18,10 @@ export type VisualizationResponseAndCount = [IVisualizationDomainDTO[], number];
 export class VisualizationBrowserComponent implements OnInit {
   public visualizationLoading = true;
   public visualizations: IVisualizationDomainDTO[];
-  public count: number;
   private page: number;
   private search: string;
 
+  public pagination: IPagination;
   public TruncateText = TruncateText;
 
   constructor(
@@ -61,7 +61,11 @@ export class VisualizationBrowserComponent implements OnInit {
     this.visualizations = response[0].map(visualization =>
       generateVisualizationMatrixName(visualization)
     );
-    this.count = response[1];
+    this.pagination = {
+      count: response[1],
+      countPerPage: response['countPerPage']
+    };
+
     this.visualizationLoading = false;
     this.windowService.scrollToTop();
   }

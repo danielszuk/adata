@@ -1,32 +1,41 @@
-<ul *ngIf="pagination.count && numberOfPages > 10" class="pagination">
-  <li *ngFor="let p of paginationArray">
-    <div
-      *ngIf="p !== undefined; else dots"
+<div *ngIf="pagination">
+  <ul
+    *ngIf="pagination.count && pagination.countPerPage && numberOfPages > 10"
+    class="pagination"
+  >
+    <li *ngFor="let p of paginationArray">
+      <div
+        *ngIf="p !== undefined; else dots"
+        class="link"
+        [class.active]="p == currentPage"
+      >
+        <a
+          class="container-gutter"
+          [routerLink]="[]"
+          [queryParams]="{ page: p }"
+        >
+          {{ p }}
+        </a>
+      </div>
+      <ng-template #dots>
+        <div class="link dots">
+          . . .
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+  <ul
+    *ngIf="pagination.count && 10 >= numberOfPages && numberOfPages > 1"
+    class="pagination"
+  >
+    <li
+      *ngFor="let p of paginationArray"
       class="link"
       [class.active]="p == currentPage"
     >
       <a class="container-gutter" [routerLink]="[]" [queryParams]="{ page: p }">
         {{ p }}
       </a>
-    </div>
-    <ng-template #dots>
-      <div class="link dots">
-        . . .
-      </div>
-    </ng-template>
-  </li>
-</ul>
-<ul
-  *ngIf="pagination.count && 10 >= numberOfPages && numberOfPages > 1"
-  class="pagination"
->
-  <li
-    *ngFor="let p of paginationArray"
-    class="link"
-    [class.active]="p == currentPage"
-  >
-    <a class="container-gutter" [routerLink]="[]" [queryParams]="{ page: p }">
-      {{ p }}
-    </a>
-  </li>
-</ul>
+    </li>
+  </ul>
+</div>

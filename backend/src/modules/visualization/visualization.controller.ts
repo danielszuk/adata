@@ -21,6 +21,7 @@ import { GetPagination } from '../util/typeorm/pagination';
 import { JwtAuthGuard } from '../user/auth/jwt/jwt.guard';
 import { ApiResponse } from '@nestjs/swagger';
 import { IVisualizationDomainDTO } from '../../shared/modules/visualization/visualization.dto';
+import { Env } from '../util/env/variables';
 
 @Controller('visualization')
 export class VisualizationController {
@@ -38,9 +39,12 @@ export class VisualizationController {
 
   @Get()
   async getVisualizations(@Query() query): Promise<any> {
-    return await this.visualizationService.getVisualizations(
-      await GetPagination(query),
-    );
+    return {
+      ...(await this.visualizationService.getVisualizations(
+        await GetPagination(query),
+      )),
+      countPerPage: Env.API_DEFAULT_PAGE_LIMIT,
+    };
   }
 
   @Get('search')
@@ -51,19 +55,25 @@ export class VisualizationController {
     if (null === keyword || undefined === keyword || keyword.length === 0) {
       throw new HttpException('Invalid keyword', HttpStatus.BAD_REQUEST);
     }
-    return await this.visualizationService.searchVisualization(
-      keyword,
-      GetPagination(query),
-    );
+    return {
+      ...(await this.visualizationService.searchVisualization(
+        keyword,
+        GetPagination(query),
+      )),
+      countPerPage: Env.API_DEFAULT_PAGE_LIMIT,
+    };
   }
 
   @Get('my-visualization')
   @UseGuards(JwtAuthGuard)
   async getUsersVisualizations(@Req() request, @Query() query): Promise<any> {
-    return this.visualizationService.getUsersVisualizations(
-      request.user,
-      GetPagination(query),
-    );
+    return {
+      ...(await this.visualizationService.getUsersVisualizations(
+        request.user,
+        GetPagination(query),
+      )),
+      countPerPage: Env.API_DEFAULT_PAGE_LIMIT,
+    };
   }
 
   @Get(':id')
