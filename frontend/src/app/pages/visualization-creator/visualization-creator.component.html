@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <div class="spacing">
+  <div *ngIf="0 !== visualization.matrices.length" class="spacing">
     <div
       *ngIf="
         visualization && visualization.x && visualization.y && !visualization.y2
@@ -69,7 +69,7 @@
       </button>
     </div>
 
-    <div *ngIf="0 !== visualization.matrices.length" class="visualization">
+    <div class="visualization">
       <adata-visualization
         [visualization]="visualization"
         interaction
