@@ -76,7 +76,9 @@ export function formatLabelText(
     const name = axis.name ? axis.name : '';
     const unit = axis.unit
       ? max
-        ? `${getLongScaleValue(max).name} ${axis.unit}`
+        ? `${getLongScaleValue(max).name ? getLongScaleValue(max).name : ''} ${
+            axis.unit
+          }`
         : axis.unit
       : '';
     return unit ? `${name} (in ${unit})` : name;

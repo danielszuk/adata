@@ -21,7 +21,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    if (!this.pagination.countPerPage) {
+    if (this.pagination && !this.pagination.countPerPage) {
       console.error(
         `You must provide '@Input() pagination.countPerPage:number' property in your adata-pagination component`
       );
@@ -39,7 +39,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.pagination.count) {
+    if (this.pagination && this.pagination.count) {
       this.numberOfPages =
         Math.floor(this.pagination.count / this.pagination.countPerPage) + 1;
       if (this.numberOfPages < 10) {

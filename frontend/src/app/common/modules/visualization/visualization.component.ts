@@ -91,41 +91,6 @@ export class VisualizationComponent
       this.generateChartData();
       this.initChart();
     }
-    // if (this.chart) {
-    //   this.generateChartData();
-    //   const reloadedChartIds = [
-    //     ...this.visualization.matrices.map(iv => iv.matrix.name)
-    //   ];
-
-    //   if (this.chartIdsArray.length > reloadedChartIds.length) {
-    //     /** REMOVE */
-    //     let remove;
-    //     for (let i = this.chartIdsArray.length - 1; 0 <= i; i--) {
-    //       const currentChartId = this.chartIdsArray[i];
-    //       if (-1 === reloadedChartIds.indexOf(currentChartId)) {
-    //         remove = currentChartId;
-    //       }
-    //     }
-    //     this.chart.unload(remove);
-    //     this.initChart();
-    //   } else {
-    //     /** ADD */
-    //     console.log(this.yAxisObject);
-
-    //     this.chart.load({
-    //       columns: this.chartDataArray,
-    //       colors: this.colorPattern,
-    //       axes: this.yAxisObject
-    //     });
-    //     this.initChart();
-    //     await nextDiggingCycle;
-    //     if (this.legendsHeight !== Height(this.legends.nativeElement)) {
-    //       this.initChart();
-    //     }
-    //   }
-    // } else {
-    //   this.initChart();
-    // }
   }
 
   private generateChartData(): void {
