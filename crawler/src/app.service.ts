@@ -30,4 +30,8 @@ export class AppService {
       { public: true },
     );
   }
+
+  public async deleteVisualizationScreenshot(id: number) {
+    this.s3.removeFile(Env.AWS_BUCKET_VISUALIZATION_SCREEN_SHOTS, `${id}.jpg`);
+  }
 }

@@ -165,11 +165,25 @@ export class VisualizationService {
       },
       { relations: ['user'] },
     );
-    if (updateVisualization.user.id === user.id) {
+    if (
+      updateVisualization.user.id === user.id ||
+      -1 !== Env.GOOGLE_ADMIN_EMAILS.indexOf(user.email)
+    ) {
       visualization.matrices = await this.updateVisualizationMatrices(
         visualization,
       );
-      return await this.visualizationRepository.save(visualization);
+
+      const updatedVisualization = await this.visualizationRepository.save(
+        visualization,
+      );
+
+      await Axios.get(
+        `${Env.CRAWLER_URL}/visualization/${visualization.id}/screen-shot`,
+      ).catch(error => {
+        logger.error(error);
+      });
+
+      return updatedVisualization;
     } else {
       visualization.id = undefined;
       return await this.createVisualization(visualization, user);
@@ -201,15 +215,28 @@ export class VisualizationService {
       { relations: ['user'] },
     );
     if (!v) {
-      return false;
+      throw new HttpException('Visualization not found.', HttpStatus.NOT_FOUND);
     }
-    if (v.user.id === user.id) {
+    if (
+      v.user.id === user.id ||
+      -1 !== Env.GOOGLE_ADMIN_EMAILS.indexOf(user.email)
+    ) {
       await getRepository(VisualizationMatrixEntity).delete({
         visualization: { id },
       });
-      return await !!this.visualizationRepository.delete({ id });
+      await this.visualizationRepository.delete({ id });
+
+      await Axios.delete(
+        `${Env.CRAWLER_URL}/visualization/${id}/screen-shot`,
+      ).catch(error => {
+        logger.error(error);
+      });
+      return true;
     } else {
-      return false;
+      throw new HttpException(
+        'Forbidden to remove visualization',
+        HttpStatus.FORBIDDEN,
+      );
     }
   }
 }
