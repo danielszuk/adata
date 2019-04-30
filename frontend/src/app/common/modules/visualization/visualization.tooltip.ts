@@ -47,7 +47,8 @@ export const generateToolTip = (
           color,
           num,
           name,
-          longScaleValues.name
+          longScaleValues.name,
+          y.unit
         );
       } else if ('y2' === yAxisObject[target.id]) {
         const name = removeSubstringByDimensions(target.id, x, y2);
@@ -59,17 +60,18 @@ export const generateToolTip = (
           color,
           num,
           name,
-          longScaleValues.name
+          longScaleValues.name,
+          y2.unit
         );
       }
     }
   });
   const tableHeaderName = `<tr><td colspan="2" class="c3-tooltip__dimension-name c3-tooltip__dimension-name--x">${
     !!x.name ? x.name : ''
-  } ${!!x.unit ? '(in ' + x.unit + ')' : ''}</td></tr>`;
+  }</td></tr>`;
   const tableHeaderValue = `<tr><th colspan="2"><div class="value__container">${
     !!targetX ? targetX : ''
-  }</div></th></tr>`;
+  }  ${!!x.unit ? x.unit : ''}</div></th></tr>`;
 
   return `
     <div class="c3-tooltip-container--inner">
@@ -79,14 +81,12 @@ export const generateToolTip = (
           ${tableHeaderValue}
           <tr><td class="c3-tooltip__dimension-name">${
             !!y.name ? y.name : ''
-          } ${!!y.unit ? '(in ' + y.unit + ')' : ''}</td></tr>
+          }</td></tr>
           ${targetsDomY}
           ${
             !!y2
               ? `
-          <tr><td class="c3-tooltip__dimension-name">${y2.name} ${
-                  !!y2.unit ? '(in ' + y2.unit + ')' : ''
-                }</td></tr>
+          <tr><td class="c3-tooltip__dimension-name">${y2.name}</td></tr>
           ${targetsDomY2}`
               : ''
           }
@@ -133,12 +133,14 @@ function removeSubstringByDimensions(
   }
 }
 
-function generateToolTipRow(target, color, num, name, scale): string {
+function generateToolTipRow(target, color, num, name, scale, unit): string {
   return `<tr class="c3-tooltip-name--${target.id}">
         <td class="value">
           <div class="value__container"  style="color:${color(target)}">
           <div  class="value__name">${!!name ? name + ':' : ''}</div>
-            <div>${!!num ? num : ''} ${!!scale ? scale : ''}</div>
+            <div>${!!num ? num : ''} ${!!scale ? scale : ''} ${
+    unit ? unit : ''
+  }</div>
           </div>
         </td>
       </tr>`;
