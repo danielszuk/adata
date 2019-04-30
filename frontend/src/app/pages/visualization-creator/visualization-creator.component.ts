@@ -37,6 +37,8 @@ export class VisualizationCreatorComponent implements OnInit {
   };
   public generateMatrixName = generateMatrixName;
   public edit = false;
+  public visualizationSaving: boolean;
+  public visualizationRemoving: boolean;
 
   public removeModalTitle: string;
   @ViewChild('removeVisualizationModal')
@@ -215,7 +217,6 @@ export class VisualizationCreatorComponent implements OnInit {
   public async onSubmit() {
     const formStatus = this.newVisualizationCreatorForm.status;
     MarkAllControlsTouched(this.newVisualizationCreatorForm);
-    console.log(this.newVisualizationCreatorForm);
     if ('VALID' === formStatus) {
       this.isFormValid = true;
     } else if ('INVALID' === formStatus) {
@@ -234,6 +235,7 @@ export class VisualizationCreatorComponent implements OnInit {
     }
 
     if (this.isFormValid) {
+      this.visualizationSaving = true;
       this.visualization.description = this.newVisualizationCreatorForm.value.description;
       this.visualization.title = this.newVisualizationCreatorForm.value.title;
 

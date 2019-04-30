@@ -84,6 +84,7 @@ export class VisualizationEditComponent extends VisualizationCreatorComponent
     }
 
     if (this.isFormValid) {
+      this.visualizationSaving = true;
       this.visualization.description = this.newVisualizationCreatorForm.value.description;
       this.visualization.title = this.newVisualizationCreatorForm.value.title;
 
@@ -96,6 +97,7 @@ export class VisualizationEditComponent extends VisualizationCreatorComponent
   }
 
   public async removeVisualization() {
+    this.visualizationRemoving = true;
     const res = await this.httpService.delete(
       `/visualization/${this.visualization.id}`
     );

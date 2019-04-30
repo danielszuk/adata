@@ -133,6 +133,7 @@
         [disabled]="!authService.getUser && !edit"
         long
         (click)="onSubmit()"
+        [loading]="visualizationSaving"
       ></cle-button>
     </div>
     <div *ngIf="!authService.getUser && !edit">
@@ -160,6 +161,7 @@
           [disabled]="!authService.getUser && edit"
           long
           (click)="updateVisualization()"
+          [loading]="visualizationSaving"
         ></cle-button>
       </div>
       <ng-template #saveVisualization>
@@ -170,6 +172,7 @@
           [disabled]="!authService.getUser && edit"
           long
           (click)="onSubmit()"
+          [loading]="visualizationSaving"
         ></cle-button>
       </ng-template>
     </div>
@@ -210,6 +213,7 @@
         value="Remove"
         danger="1"
         (click)="removeVisualization()"
+        [loading]="visualizationRemoving"
       ></cle-button>
       <cle-button
         class="cancel__remove"

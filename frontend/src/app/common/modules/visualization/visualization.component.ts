@@ -13,23 +13,18 @@ import * as c3 from 'c3';
 import { IVisualizationDomainDTO } from 'src/shared/modules/visualization/visualization.dto';
 import {
   IYAxisMax,
-  getLongScaleValue,
   formatVerticalAxis,
   formatLabelText
 } from './visualization-util/visualization.vertical-calc';
 import { Height, Width } from '../../utils/dimensions';
-import { ColorCodes } from 'src/shared/enums/colors.enum';
 import { generateToolTip } from './visualization.tooltip';
 import { EmptyBoolean } from '../../utils/component-decorators/empty-boolean';
 import { IDimensionDTO } from 'src/shared/modules/dimension/dimension.dto';
 import { DeviceService } from '../../services/device.service';
-import { nextDiggingCycle } from '../../utils/next-digging-cycle';
-import { IChartAxisDTO } from './visualization.chart-axis.interface';
 import {
   generateChartData,
   IYAndY2Limits
 } from './visualization-util/visualization.util.generate-chart-data';
-import { IVisualizationMatrixDomainDTO } from 'src/shared/modules/visualization/visualization.matrix/visualization.matrix.dto';
 
 @Component({
   selector: 'adata-visualization',
@@ -130,7 +125,7 @@ export class VisualizationComponent
       throw Error(`Chart width is 0. Draw aborted.`);
     }
 
-    this.chart = c3.generate({
+    const c3Config: c3.ChartConfiguration = {
       bindto: this.c3Dom.nativeElement,
       size: { height, width },
       data: {
@@ -217,6 +212,14 @@ export class VisualizationComponent
         }
       },
       grid: { x: { show: true }, y: { show: true } }
-    });
+    };
+
+    // Custom, not documented properties
+    if (!c3Config.point) {
+      c3Config.point = {};
+    }
+    c3Config.point['sensitivity'] = 50;
+
+    this.chart = c3.generate(c3Config);
   }
 }

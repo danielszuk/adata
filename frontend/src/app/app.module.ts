@@ -15,6 +15,15 @@ import { WindowService } from './common/services/window.service';
 import { AuthModule } from './common/modules/auth/auth.module';
 import { AdminAuthGuard } from './common/modules/auth/guards/admin-auth-guard.service';
 import { AuthGuard } from './common/modules/auth/guards/auth-guard.service';
+import { VisualizationModule } from './common/modules/visualization/visualization.module';
+import { PaginationModule } from './common/modules/pagination/pagination.module';
+import { VisualizationBrowserComponent } from './pages/visualization-browser/visualization-browser.component';
+import { VisualizationSavedComponent } from './pages/visualization-browser/visualization-saved/visualization-saved.component';
+import { CommonComponentsModule } from './common/components/common-components.module';
+import { VisualizationDetailsComponent } from './pages/visualization-details/visualization-details.component';
+// tslint:disable-next-line:max-line-length
+import { VisualizationDetailsFullScreenComponent } from './pages/visualization-details/visualization-details-full-screen/visualization-details-full-screen.component';
+import { SocialModule } from './common/modules/social/social.module';
 
 const appInitializerFn = (
   configService: ConfigService
@@ -33,10 +42,18 @@ export function tokenGetter(): string {
 }
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent],
+  declarations: [
+    AppComponent,
+    PageNotFoundComponent,
+    VisualizationBrowserComponent,
+    VisualizationSavedComponent,
+    VisualizationDetailsComponent,
+    VisualizationDetailsFullScreenComponent
+  ],
   imports: [
     AuthModule,
     BrowserModule,
+    CommonComponentsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HeaderModule,
@@ -46,7 +63,10 @@ export function tokenGetter(): string {
       config: {
         tokenGetter
       }
-    })
+    }),
+    VisualizationModule,
+    PaginationModule,
+    SocialModule
   ],
   providers: [
     ConfigService,

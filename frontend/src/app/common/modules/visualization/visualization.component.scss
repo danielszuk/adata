@@ -88,6 +88,8 @@ $lineWidth: 2px;
 }
 :host ::ng-deep {
   .c3-tooltip-container {
+    padding: $space5 $space10;
+
     border: 1px solid $colorBlack;
     border-radius: $sizeBorderRadius;
     background-color: $colorWhite;
@@ -95,9 +97,10 @@ $lineWidth: 2px;
     table,
     th,
     td {
-      background-color: $colorWhite;
-      border: solid transparent;
-      color: $colorFontGrey;
+      padding: 0;
+      background: none !important;
+      border: solid transparent !important;
+      color: $colorFontNormal;
     }
 
     .value__container {
@@ -105,13 +108,30 @@ $lineWidth: 2px;
       flex-direction: row;
       justify-content: space-between;
 
+      font-size: $fontSize12;
+      font-weight: $fontWeightSemiBold;
+
       .value__name {
         padding-right: $space10;
       }
+    }
+
+    .c3-tooltip__dimension-name {
+      padding-top: $space10;
+
+      font-size: $fontSize10;
+      font-weight: $fontWeightSemiBold;
+      text-transform: uppercase;
+      letter-spacing: $fontLetterSpacing05;
+      color: $colorFontGrey;
+    }
+    .c3-tooltip__dimension-name--x {
+      padding-top: 0;
     }
   }
 
   .c3-tooltip {
     background-color: transparent !important;
+    box-shadow: none !important;
   }
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from 'src/app/core/http.service';
 import { IVisualizationDomainDTO } from 'src/shared/modules/visualization/visualization.dto';
 import { ActivatedRoute } from '@angular/router';
 import { VisualizationBrowserSearchService } from 'src/app/common/services/visualization-browser-search.service';
@@ -7,6 +6,7 @@ import { WindowService } from 'src/app/common/services/window.service';
 import { TruncateText } from '../../common/utils/truncate-text';
 import { generateVisualizationMatrixName } from 'src/app/common/modules/visualization/visualization-util/visualization-util.generate-chart-names';
 import { IPagination } from '../../common/modules/pagination/pagination.component';
+import { HttpService } from '../../core/http.service';
 
 export type VisualizationResponseAndCount = [IVisualizationDomainDTO[], number];
 
@@ -18,17 +18,17 @@ export type VisualizationResponseAndCount = [IVisualizationDomainDTO[], number];
 export class VisualizationBrowserComponent implements OnInit {
   public visualizationLoading = true;
   public visualizations: IVisualizationDomainDTO[];
-  private page: number;
+  public page: number;
   private search: string;
 
   public pagination: IPagination;
   public TruncateText = TruncateText;
 
   constructor(
-    private readonly http: HttpService,
-    private activatedRoute: ActivatedRoute,
-    private searchService: VisualizationBrowserSearchService,
-    private windowService: WindowService
+    protected readonly http: HttpService,
+    protected activatedRoute: ActivatedRoute,
+    protected searchService: VisualizationBrowserSearchService,
+    protected windowService: WindowService
   ) {}
 
   async ngOnInit() {
@@ -49,7 +49,7 @@ export class VisualizationBrowserComponent implements OnInit {
     await this.getData();
   }
 
-  private async getData() {
+  protected async getData() {
     this.visualizationLoading = true;
     this.searchService.setSearch(this.search);
     const response = await this.http.get<VisualizationResponseAndCount>(

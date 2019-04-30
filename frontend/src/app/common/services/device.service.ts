@@ -23,8 +23,6 @@ interface DeviceResolution {
   providedIn: 'root'
 })
 export class DeviceService implements OnDestroy {
-  private Resolution$: BehaviorSubject<DeviceResolution>;
-  private Resolution: DeviceResolution;
   public readonly pixelRatio: number;
 
   private IsTouch: boolean;
@@ -61,23 +59,10 @@ export class DeviceService implements OnDestroy {
 
       this.pixelRatio = window.devicePixelRatio;
 
-      this.getResolution();
-      this.Resolution$ = new BehaviorSubject<DeviceResolution>(this.Resolution);
-      this.resizeRemoveListener = this.renderer.listen(
-        'window',
-        'resize',
-        () => {
-          this.getResolution();
-          this.Resolution$.next(this.Resolution);
-        }
-      );
-
       // const md = new MobileDetect(window.navigator.userAgent);
       // this.isMobile = !!md.mobile();
       // this.isIos = md.is('iPhone');
       // this.isAndroid = md.is('AndroidOS');
-    } else {
-      this.Resolution$ = new BehaviorSubject<DeviceResolution>(undefined);
     }
   }
 
@@ -86,12 +71,20 @@ export class DeviceService implements OnDestroy {
     this.resizeRemoveListener();
   }
 
-  public get resolution$(): Observable<DeviceResolution> {
-    return this.Resolution$.asObservable();
-  }
-
   public get resolution(): DeviceResolution {
-    return this.Resolution;
+    if (isPlatformBrowser(this.platformId)) {
+      const width = window.innerWidth;
+      const height = window.innerWidth;
+      return {
+        width,
+        height,
+        desktop: width >= BpDesktopMin,
+        stDesktop: width < BpDesktopMin,
+        mobileS: width <= BpMobileSMax
+      };
+    } else {
+      return undefined;
+    }
   }
 
   public get isTouch(): boolean {
@@ -100,18 +93,6 @@ export class DeviceService implements OnDestroy {
 
   public get isMouse(): boolean {
     return this.IsMouse;
-  }
-
-  private getResolution(): void {
-    const width = window.innerWidth;
-    const height = window.innerWidth;
-    this.Resolution = {
-      width,
-      height,
-      desktop: width >= BpDesktopMin,
-      stDesktop: width < BpDesktopMin,
-      mobileS: width <= BpMobileSMax
-    };
   }
 
   private listenToMouse(): void {
