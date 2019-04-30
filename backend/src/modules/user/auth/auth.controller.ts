@@ -44,10 +44,4 @@ export class AuthController {
       res.redirect(Env.FE_URL);
     }
   }
-
-  @Get('protected')
-  @UseGuards(JwtAdminGuard)
-  async protectedRoute() {
-    return 'proteted';
-  }
 }

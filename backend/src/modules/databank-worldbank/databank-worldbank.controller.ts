@@ -8,6 +8,7 @@ import {
   Delete,
   Query,
   HttpException,
+  UseGuards,
 } from '@nestjs/common';
 
 import { DataBankWorldBankService } from './databank-worldbank.service';
@@ -15,12 +16,14 @@ import { DataBankWorldBankDomain } from './databank-worldbank.domain';
 import { ApiResponse } from '@nestjs/swagger';
 import { IDataBankWorldBankDTO } from '../../shared/modules/databank-worldbank/databank-worldbank.dto';
 import { IChannelInfoDTO } from '../../shared/dtos/channel-info.dto';
+import { JwtAuthGuard } from '../user/auth/jwt/jwt.guard';
 
 @Controller('databank-worldbank')
 export class DataBankWorldBankController {
   constructor(readonly dbwbService: DataBankWorldBankService) {}
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   @ApiResponse({
     status: HttpStatus.CREATED,
     description: 'DataBankWorldBank Sync inserted, return with it',
@@ -36,6 +39,7 @@ export class DataBankWorldBankController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Return all DataBankWorldBank Sync',
@@ -45,6 +49,7 @@ export class DataBankWorldBankController {
   }
 
   @Get('info')
+  @UseGuards(JwtAuthGuard)
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Return info about the given DataBankWorldBank Api Uri',
@@ -69,6 +74,7 @@ export class DataBankWorldBankController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'The DataBankWorldBank Sync removed',
@@ -82,6 +88,7 @@ export class DataBankWorldBankController {
   }
 
   @Get('start/:id')
+  @UseGuards(JwtAuthGuard)
   @ApiResponse({
     status: HttpStatus.OK,
     description:

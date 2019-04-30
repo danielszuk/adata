@@ -8,6 +8,6 @@ export class JwtAdminGuard extends JwtAuthGuard {
   async canActivate(context: ExecutionContext) {
     await super.canActivate(context);
     const user = context.switchToHttp().getRequest().user;
-    return -1 === Env.GOOGLE_ADMIN_EMAILS.indexOf(user.email);
+    return -1 !== Env.GOOGLE_ADMIN_EMAILS.indexOf(user.email);
   }
 }

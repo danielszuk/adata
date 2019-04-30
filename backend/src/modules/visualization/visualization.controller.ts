@@ -92,6 +92,7 @@ export class VisualizationController {
   }
 
   @Put()
+  @UseGuards(JwtAuthGuard)
   @ApiResponse({
     status: HttpStatus.OK,
     description:
@@ -101,7 +102,6 @@ export class VisualizationController {
     status: HttpStatus.BAD_REQUEST,
     description: 'Invalid visualization ID',
   })
-  @UseGuards(JwtAuthGuard)
   async putVisualization(
     @Body() visualization: VisualizationDomain,
     @Req() request,
