@@ -200,7 +200,7 @@
         authService.getUser &&
         visualization.user &&
         authService.getUser.id === visualization.user.id) ||
-      authService.getUser.admin
+      (authService.getUser && authService.getUser.admin)
     "
     class="spacing"
   >
