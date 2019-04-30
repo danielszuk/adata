@@ -7,18 +7,21 @@ import {
   Delete,
   HttpStatus,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 
 import { ApiResponse } from '@nestjs/swagger';
 import { DimensionDomain } from './dimension.domain';
 import { DimensionService } from './dimension.services';
 import { IDimensionDTO } from '../../shared/modules/dimension/dimension.dto';
+import { JwtAdminGuard } from '../user/auth/jwt/jwt.admin.guard';
 
 @Controller('dimension')
 export class DimensionController {
   constructor(readonly dimensionService: DimensionService) {}
 
   @Post()
+  @UseGuards(JwtAdminGuard)
   @ApiResponse({
     status: HttpStatus.CREATED,
     description: 'Dimension created. Return with the created dimension.',
@@ -34,6 +37,7 @@ export class DimensionController {
   }
 
   @Put()
+  @UseGuards(JwtAdminGuard)
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Dimension updated.',
@@ -61,6 +65,7 @@ export class DimensionController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAdminGuard)
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Dimension deleted',
