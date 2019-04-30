@@ -196,10 +196,11 @@
 
   <div
     *ngIf="
-      edit &&
-      authService.getUser &&
-      visualization.user &&
-      authService.getUser.id === visualization.user.id
+      (edit &&
+        authService.getUser &&
+        visualization.user &&
+        authService.getUser.id === visualization.user.id) ||
+      authService.getUser.admin
     "
     class="spacing"
   >
