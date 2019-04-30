@@ -131,7 +131,7 @@ function generateToolTipRow(target, color, num, name): string {
   return `<tr class="c3-tooltip-name--${target.id}">
         <td class="value">
           <div class="value__container"  style="color:${color(target)}">
-          <div  class="value__name">${!!name ? name : ''}: </div>
+          <div  class="value__name">${!!name ? name + ':' : ''}</div>
             <div>${!!num ? num : ''} ${!!name ? name : ''}</div>
           </div>
         </td>
