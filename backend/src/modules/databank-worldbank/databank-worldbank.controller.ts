@@ -17,6 +17,7 @@ import { ApiResponse } from '@nestjs/swagger';
 import { IDataBankWorldBankDTO } from '../../shared/modules/databank-worldbank/databank-worldbank.dto';
 import { IChannelInfoDTO } from '../../shared/dtos/channel-info.dto';
 import { JwtAuthGuard } from '../user/auth/jwt/jwt.guard';
+import { JwtAdminGuard } from '../user/auth/jwt/jwt.admin.guard';
 
 @Controller('databank-worldbank')
 export class DataBankWorldBankController {
@@ -74,7 +75,7 @@ export class DataBankWorldBankController {
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAdminGuard)
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'The DataBankWorldBank Sync removed',
