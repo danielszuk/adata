@@ -1,11 +1,8 @@
-import {
-  getLongScaleValue,
-  IYAxisMax,
-  formatVerticalAxis
-} from './visualization-util/visualization.vertical-calc';
+import { getLongScaleValue } from './visualization-util/visualization.vertical-calc';
 import { IYAndY2Limits } from './visualization-util/visualization.util.generate-chart-data';
 import { IDimensionDTO } from 'src/shared/modules/dimension/dimension.dto';
 import { generateChartDimensions } from './visualization-util/visualization-util.generate-chart-names';
+import { Round } from '../../utils/round';
 
 interface IGraphPointTarget {
   x: Date;
@@ -26,8 +23,6 @@ export const generateToolTip = (
   y2?: IDimensionDTO
 ): string => {
   const targets: IGraphPointTarget[] = data;
-  const maxTarget: IGraphPointTarget = getMaxTarget(targets);
-  const maxFormated: IYAxisMax = getLongScaleValue(maxTarget.value);
 
   let targetX: any;
   let targetsDomY = '';
@@ -40,27 +35,24 @@ export const generateToolTip = (
       if ('y' === yAxisObject[target.id]) {
         const name = removeSubstringByDimensions(target.id, x, y);
         longScaleValues = getLongScaleValue(limits.y.max);
-        num = formatVerticalAxis(target.value, limits.y.max);
 
         targetsDomY += generateToolTipRow(
           target,
           color,
-          num,
+          formatNumber(target.value),
           name,
-          longScaleValues.name,
           y.unit
         );
       } else if ('y2' === yAxisObject[target.id]) {
         const name = removeSubstringByDimensions(target.id, x, y2);
         longScaleValues = getLongScaleValue(limits.y2.max);
-        num = formatVerticalAxis(target.value, limits.y2.max);
+        num = target.value;
 
         targetsDomY2 += generateToolTipRow(
           target,
           color,
-          num,
+          formatNumber(target.value),
           name,
-          longScaleValues.name,
           y2.unit
         );
       }
@@ -95,24 +87,34 @@ export const generateToolTip = (
     </div>`;
 };
 
-function formatNumber(d: number, power: number): string {
-  const num = d / Math.pow(10, power);
-  return num.toFixed(3) === '0.000' ? num.toString() : num.toFixed(3);
-}
+function formatNumber(num: number): string {
+  const sectionLength = 3;
 
-function getMaxTarget(targets: IGraphPointTarget[]) {
-  let maxTarget: IGraphPointTarget = {
-    id: undefined,
-    index: undefined,
-    value: Number.NEGATIVE_INFINITY,
-    x: undefined
-  };
-  for (const target of targets) {
-    if (maxTarget.value < target.value) {
-      maxTarget = target;
-    }
+  const numRounded = Round(
+    num,
+    Math.abs(num) < 10 ? 2 : Math.abs(num) < 50 ? 1 : 0
+  );
+
+  const exploded = numRounded.toString().split('.');
+  const wholeLenght = exploded[0].length;
+  let whole = '';
+  const spaces = Math.floor(wholeLenght / sectionLength);
+  for (let i = 0; i < spaces; i += 1) {
+    whole =
+      ' ' +
+      exploded[0].slice(
+        wholeLenght - (i + 1) * sectionLength,
+        wholeLenght - i * sectionLength
+      ) +
+      whole;
   }
-  return maxTarget;
+  if (wholeLenght > spaces * sectionLength) {
+    whole = exploded[0].slice(0, wholeLenght - spaces * sectionLength) + whole;
+  } else {
+    whole = whole.slice(1);
+  }
+
+  return whole + (exploded[1] ? '.' + exploded[1] : '');
 }
 
 function removeSubstringByDimensions(
@@ -133,14 +135,12 @@ function removeSubstringByDimensions(
   }
 }
 
-function generateToolTipRow(target, color, num, name, scale, unit): string {
+function generateToolTipRow(target, color, num, name, unit): string {
   return `<tr class="c3-tooltip-name--${target.id}">
         <td class="value">
           <div class="value__container"  style="color:${color(target)}">
           <div  class="value__name">${!!name ? name + ':' : ''}</div>
-            <div>${!!num ? num : ''} ${!!scale ? scale : ''} ${
-    unit ? unit : ''
-  }</div>
+            <div>${!!num ? num : ''} ${unit ? unit : ''}</div>
           </div>
         </td>
       </tr>`;
