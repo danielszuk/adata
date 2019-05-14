@@ -1,5 +1,5 @@
-import * as Dotenv from 'dotenv-safe';
-Dotenv.config();
+// import * as Dotenv from 'dotenv-safe';
+// Dotenv.config();
 
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
