@@ -35,6 +35,7 @@ const GOOGLE_ADMIN_EMAILS = process.env.GOOGLE_ADMIN_EMAILS ? process.env.GOOGLE
 
 /*********************************** FRONTEND ***********************************/
 const FE_PORT = process.env.FE_PORT ?  process.env.FE_PORT : '';
+const FE_URL = process.env.FE_URL ?  process.env.FE_URL : '';
 const INPUT_TIMEOUT = process.env.INPUT_TIMEOUT ? process.env.INPUT_TIMEOUT : ''; 
 
 const FE_DIST_PATH = `${TARGET_SERVER_APP_PATH}/frontend/dist`;
