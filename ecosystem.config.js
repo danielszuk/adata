@@ -38,7 +38,7 @@ const FE_PORT = process.env.FE_PORT ?  process.env.FE_PORT : '';
 const FE_URL = process.env.FE_URL ?  process.env.FE_URL : '';
 const INPUT_TIMEOUT = process.env.INPUT_TIMEOUT ? process.env.INPUT_TIMEOUT : ''; 
 
-const FE_DIST_PATH = `${TARGET_SERVER_APP_PATH}/frontend/dist`;
+const FE_DIST_PATH = `${TARGET_SERVER_APP_PATH}/source/frontend/dist`;
 const FE_CONFIG_JSON_PATH = `${TARGET_SERVER_APP_PATH}/config/config.json`;
 
 const BE_DIST_PATH = `${TARGET_SERVER_APP_PATH}/backend/dist`;
@@ -52,7 +52,7 @@ module.exports = {
   apps: [
     {
       name: 'frontend',
-      script: `${FE_DIST_PATH}/server.js`,
+      script: `node server.js --prefix source/frontend/dist`,
       env: {
         NODE_ENV: 'development',
         PORT: FE_PORT,
@@ -67,7 +67,7 @@ module.exports = {
     },
     {
       name: 'backend',
-      script: `${BE_DIST_PATH}/main.js`,
+      script: `npm run start:prod --prefix source/backend`,
       env: {
         NODE_ENV: 'development',
         PORT: API_PORT,
@@ -128,10 +128,10 @@ module.exports = {
         'git submodule init'
       + ' && git submodule update'
       + ' && npm install --prefix backend'
-      + ' && npm run build --prefix backend'
+      + ' && npm run build --prefix source/backend'
       + ' && npm install --prefix frontend'
-      + ` && echo {"backendUrl": "${API_URL}","appUrl": "${FE_URL}","inputTimeoutBeforeServerCall": ${INPUT_TIMEOUT}} > ${TARGET_SERVER_APP_PATH}/backend/src/config/config.json`
-      + ' && npm run build:prod --prefix frontend'
+      + ` && echo {"backendUrl": "${API_URL}","appUrl": "${FE_URL}","inputTimeoutBeforeServerCall": ${INPUT_TIMEOUT}} > ${TARGET_SERVER_APP_PATH}/source/backend/src/config/config.json`
+      + ' && npm run build:prod --prefix source/frontend'
       + ' && pm2 startOrRestart ecosystem.config.js --only frontend --env=production'
       + ' && pm2 startOrRestart ecosystem.config.js --only backend --env=production'
       + ' && pm2 save'
