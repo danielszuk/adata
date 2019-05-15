@@ -126,14 +126,14 @@ module.exports = {
       'post-deploy':
         'git submodule init'
       + ' && git submodule update'
-      + ' && printf \"---------------------------------------------------- git submodule update \n \"'
+      + ' && echo \"---------------------------------------------------- git submodule update \n \"'
       + ' && npm install --prefix backend'
-      + ' && printf \"---------------------------------------------------- npm install --prefix backend \n \"'
+      + ' && echo \"---------------------------------------------------- npm install --prefix backend \n \"'
       + ' && npm run build --prefix backend'
-      + ' && printf \"---------------------------------------------------- npm run build --prefix backend \n \"'
+      + ' && echo \"---------------------------------------------------- npm run build --prefix backend \n \"'
       + ' && npm install --prefix frontend'
-      + ' && printf \"---------------------------------------------------- install --prefix frontend \n \"'
-      + ` && printf \"{\"backendUrl\": \"${API_URL}\",\"appUrl\": \"${FE_URL}\",\"inputTimeoutBeforeServerCall\": ${INPUT_TIMEOUT}}\" > ${TARGET_SERVER_APP_PATH}/backend/src/config/config.json`
+      + ' && echo \"---------------------------------------------------- install --prefix frontend \n \"'
+      + ` && echo \"{\"backendUrl\": \"${API_URL}\",\"appUrl\": \"${FE_URL}\",\"inputTimeoutBeforeServerCall\": ${INPUT_TIMEOUT}}\" > ${TARGET_SERVER_APP_PATH}/backend/src/config/config.json`
       + ' && npm run build:prod --prefix frontend'
       + ' && pm2 startOrRestart ecosystem.config.js --only frontend --env=production'
       + ' && pm2 startOrRestart ecosystem.config.js --only backend --env=production'
