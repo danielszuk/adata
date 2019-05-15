@@ -126,13 +126,13 @@ module.exports = {
       'post-deploy':
         'git submodule init'
       + ' && git submodule update'
-      + ' && echo "---------------------------------------------------- git submodule update"'
+      + ' && echo \"---------------------------------------------------- git submodule update\"'
       + ' && npm install --prefix backend'
-      + ' && echo "---------------------------------------------------- npm install --prefix backend"'
+      + ' && echo \"---------------------------------------------------- npm install --prefix backend\"'
       + ' && npm run build --prefix backend'
-      + ' && echo "---------------------------------------------------- npm run build --prefix backend"'
+      + ' && echo \"---------------------------------------------------- npm run build --prefix backend\"'
       + ' && npm install --prefix frontend'
-      + ' && echo "---------------------------------------------------- install --prefix frontend"'
+      + ' && echo \"---------------------------------------------------- install --prefix frontend\"'
       + ` && echo {"backendUrl": "${API_URL}","appUrl": "${FE_URL}","inputTimeoutBeforeServerCall": ${INPUT_TIMEOUT}} > ${TARGET_SERVER_APP_PATH}/backend/src/config/config.json`
       + ' && npm run build:prod --prefix frontend'
       + ' && pm2 startOrRestart ecosystem.config.js --only frontend --env=production'
