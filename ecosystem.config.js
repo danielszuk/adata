@@ -129,7 +129,7 @@ module.exports = {
       + ' && npm install --prefix backend'
       + ' && npm run build --prefix backend'
       + ' && npm install --prefix frontend'
-      + ` && printf "{"backendUrl": "${API_URL}","appUrl": "${FE_URL}","inputTimeoutBeforeServerCall": ${INPUT_TIMEOUT}}" > ${TARGET_SERVER_APP_PATH}/backend/src/config/config.json`
+      //+ ` && printf "{"backendUrl": "${API_URL}","appUrl": "${FE_URL}","inputTimeoutBeforeServerCall": ${INPUT_TIMEOUT}}" > ${TARGET_SERVER_APP_PATH}/backend/src/config/config.json`
       + ' && npm run build:prod --prefix frontend'
       + ' && pm2 startOrRestart ecosystem.config.js --only frontend --env=production'
       + ' && pm2 startOrRestart ecosystem.config.js --only backend --env=production'
