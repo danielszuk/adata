@@ -1,5 +1,5 @@
-// import * as Dotenv from 'dotenv-safe';
-// Dotenv.config();
+import * as Dotenv from 'dotenv-safe';
+Dotenv.config();
 
 import { Logger } from './modules/util/logger';
 import { ApiApp } from './apps/api/api.app';
