@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe, Logger } from '@nestjs/common';
 
-import startApiSwagger from './api.swagger';
 import { Env } from '../../modules/util/env/variables';
 import { App } from '../app';
 import { ApiModule } from './api.module';
@@ -24,6 +23,9 @@ export class ApiApp extends App {
       },
       logger: new Logger(),
     });
+    if (!Env.DEV) {
+      this.app.setGlobalPrefix('api');
+    }
 
     this.app.useGlobalPipes(
       new ValidationPipe({
