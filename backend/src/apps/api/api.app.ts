@@ -34,7 +34,6 @@ export class ApiApp extends App {
       }),
     );
 
-    await startApiSwagger(this.app);
     await this.listen(this.app);
 
     this.logger.log('bootstrap finished');
