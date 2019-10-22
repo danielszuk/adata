@@ -4,6 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { HeaderService } from './pages/header/header.service';
+import { GoogleAnalyticsService } from './common/services/google-analytics.service';
 
 @Component({
   selector: 'adata-root',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private routerSubscription: Subscription;
 
   constructor(
+    private ga: GoogleAnalyticsService,
     public readonly deviceService: DeviceService,
     public readonly header: HeaderService,
     private readonly router: Router,
