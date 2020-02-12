@@ -1,6 +1,7 @@
 import { INestApplication } from '@nestjs/common';
 import { Server } from 'http';
 import { Logger } from '../modules/util/logger';
+import {Env} from '../modules/util/env/variables';
 
 export abstract class App {
   public readonly name: string;
@@ -30,7 +31,7 @@ export abstract class App {
 
   protected async listen(app: any): Promise<void> {
     try {
-      this.server = await app.listen(3000);
+      this.server = await app.listen(Env.API_PORT);
       this.logger.log(`server started, listening`);
     } catch (error) {
       this.logger.error('unable to start server', error);

@@ -1,5 +1,5 @@
 {
-  "backendUrl": "<URL of backend excluding trailing slash>",
-  "appUrl": "<URL of app excluding trailing slash>",
-  "inputTimeoutBeforeServerCall": "<milisecs after input changes and before server call>"
+  "backendUrl": "http://localhost:6200",
+  "appUrl": "http://localhost:4200",
+  "inputTimeoutBeforeServerCall": "1000"
 }
