@@ -1,19 +1,15 @@
-import { Logger } from '../util/logger';
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { Repository, getRepository, createQueryBuilder } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
+import {getRepository, Repository} from 'typeorm';
+import {InjectRepository} from '@nestjs/typeorm';
 
-import { VisualizationEntity } from './visualization.entity';
-import { VisualizationDomain } from './visualization.domain';
-import { Pagination } from '../util/typeorm/pagination';
-import { MatrixEntity } from '../matrix/matrix.entity';
-import { UserEntity } from '../user/user.entity';
-import { VisualizationMatrixEntity } from './visualization.matirx/visualization.matrix.entity';
-import { VisualizationMatrixDomain } from './visualization.matirx/visualization.matrix.domain';
-import Axios from 'axios';
-import { Env } from '../util/env/variables';
-
-const logger = new Logger('visualization.service');
+import {VisualizationEntity} from './visualization.entity';
+import {VisualizationDomain} from './visualization.domain';
+import {Pagination} from '../util/typeorm/pagination';
+import {MatrixEntity} from '../matrix/matrix.entity';
+import {UserEntity} from '../user/user.entity';
+import {VisualizationMatrixEntity} from './visualization.matirx/visualization.matrix.entity';
+import {VisualizationMatrixDomain} from './visualization.matirx/visualization.matrix.domain';
+import {Env} from '../util/env/variables';
 
 @Injectable()
 export class VisualizationService {
@@ -40,14 +36,15 @@ export class VisualizationService {
       vmArray,
     );
 
-    const visualization = await this.visualizationRepository.save(vDomain);
-    await Axios.get(
-      `${Env.CRAWLER_URL}/visualization/${visualization.id}/screen-shot`,
-    ).catch(error => {
-      logger.error(error);
-    });
+    /*
+     await Axios.get(
+       `${Env.CRAWLER_URL}/visualization/${visualization.id}/screen-shot`,
+     ).catch(error => {
+       logger.error(error);
+     });
+    */
 
-    return visualization;
+    return await this.visualizationRepository.save(vDomain);
   }
 
   async getVisualizations(p: Pagination): Promise<any> {
@@ -158,7 +155,6 @@ export class VisualizationService {
     visualization: VisualizationDomain,
     user: UserEntity,
   ): Promise<any | VisualizationEntity> {
-    visualization.matrices.forEach(visualizationMatrix => {});
     const updateVisualization = await this.visualizationRepository.findOne(
       {
         id: visualization.id,
@@ -173,17 +169,15 @@ export class VisualizationService {
         visualization,
       );
 
-      const updatedVisualization = await this.visualizationRepository.save(
+      // await Axios.get(
+      //   `${Env.CRAWLER_URL}/visualization/${visualization.id}/screen-shot`,
+      // ).catch(error => {
+      //   logger.error(error);
+      // });
+
+      return await this.visualizationRepository.save(
         visualization,
       );
-
-      await Axios.get(
-        `${Env.CRAWLER_URL}/visualization/${visualization.id}/screen-shot`,
-      ).catch(error => {
-        logger.error(error);
-      });
-
-      return updatedVisualization;
     } else {
       visualization.id = undefined;
       return await this.createVisualization(visualization, user);
@@ -226,11 +220,11 @@ export class VisualizationService {
       });
       await this.visualizationRepository.delete({ id });
 
-      await Axios.delete(
-        `${Env.CRAWLER_URL}/visualization/${id}/screen-shot`,
-      ).catch(error => {
-        logger.error(error);
-      });
+      // await Axios.delete(
+      //   `${Env.CRAWLER_URL}/visualization/${id}/screen-shot`,
+      // ).catch(error => {
+      //   logger.error(error);
+      // });
       return true;
     } else {
       throw new HttpException(
