@@ -1,5 +1,5 @@
 {
   "backendUrl": "http://localhost:6200",
   "appUrl": "http://localhost:4200",
-  "inputTimeoutBeforeServerCall": "1000"
+  "inputTimeoutBeforeServerCall": 300
 }
