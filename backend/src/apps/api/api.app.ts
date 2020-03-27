@@ -23,9 +23,6 @@ export class ApiApp extends App {
       },
       logger: new Logger(),
     });
-    if (!Env.DEV) {
-      this.app.setGlobalPrefix('api');
-    }
 
     this.app.useGlobalPipes(
       new ValidationPipe({

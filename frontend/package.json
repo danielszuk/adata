@@ -8,9 +8,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "deploy": "gcloud app deploy",
     "webpack:server": "webpack --config webpack.server.config.js",
     "build:prod": "ng build --prod && npm run webpack:server",
-    "build:ssr": "ng build && npm run webpack:server"
+    "build:test": "ng build && npm run webpack:server"
   },
   "private": true,
   "dependencies": {
