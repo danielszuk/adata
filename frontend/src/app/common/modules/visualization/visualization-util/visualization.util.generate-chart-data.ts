@@ -129,12 +129,6 @@ function getYAndY2AxisMinMax(
   const yExtent = Math.abs(yMax - yMin);
   const y2Extent = Math.abs(y2Max - y2Min);
   const extensionSensibility = 0.2;
-  // Alignment y axes to zero
-  const distantTo0 = (yValue: number) => Math.abs(0 - yValue);
-  if (distantTo0(yMin) < yExtent * extensionSensibility && yMin > 0) { yMin = 0; }
-  if (distantTo0(yMax) < yExtent * extensionSensibility && yMax < 0) { yMax = 0; }
-  if (distantTo0(y2Min) < y2Extent * extensionSensibility && y2Min > 0) { y2Min = 0; }
-  if (distantTo0(y2Max) < y2Extent * extensionSensibility && y2Max < 0) { y2Max = 0; }
   // Alignment y axes to each other
   if (
     // if yAxes domains are overlap
