@@ -138,14 +138,14 @@ function getYAndY2AxisMinMax(
         // if y are above of y2
         yMin > y2Max && (
           yMin - y2Max < yExtent * extensionSensibility
-          || yMin - y2Max < y2Extent * extensionSensibility
+          && yMin - y2Max < y2Extent * extensionSensibility
         )
       )
     || (
       // if y2 are above of y
       y2Min > yMax && (
         y2Min - yMax < yExtent * extensionSensibility
-        || y2Min - yMax < y2Extent * extensionSensibility
+        && y2Min - yMax < y2Extent * extensionSensibility
       )
     )
   ) {
