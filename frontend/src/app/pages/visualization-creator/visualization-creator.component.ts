@@ -268,6 +268,9 @@ export class VisualizationCreatorComponent implements OnInit {
         '/visualization',
         this.visualization
       );
+      // Remove saved visualization
+      this.localStorage.getItemAndRemove(LocalStorageKey.CREATOR_FORM);
+      this.localStorage.getItemAndRemove(LocalStorageKey.CREATOR_VISUALIZATION);
       this.router.navigate([`visualization`, res.id]);
     }
   }
