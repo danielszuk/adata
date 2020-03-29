@@ -1,19 +1,19 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpService } from 'src/app/core/http.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { IVisualizationDomainDTO } from 'src/shared/modules/visualization/visualization.dto';
-import { IMatrixDomainDTO } from 'src/shared/modules/matrix/matrix.dto';
-import { ComposeValidators } from 'src/app/common/modules/form/utils/compose-validators/compose-validators';
-import { VisualizationDomain } from 'src/shared/modules/visualization/visualization.domain';
-import { Router } from '@angular/router';
-import { take } from 'rxjs/operators';
-import { AuthService } from 'src/app/common/modules/auth/auth.service';
-import { IVisualizationMatrixDomainDTO } from 'src/shared/modules/visualization/visualization.matrix/visualization.matrix.dto';
-import { Colors } from 'src/shared/enums/colors.enum';
-import { MarkAllControlsTouched } from '../../common/modules/form/utils/mark-all-controls-touched';
-import { IDimensionDTO } from 'src/shared/modules/dimension/dimension.dto';
-import { generateMatrixName } from 'src/app/common/modules/visualization/visualization-util/visualization-util.generate-chart-names';
-import { ModalComponent } from 'src/app/common/modules/modal/modal.component';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {HttpService} from 'src/app/core/http.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {IVisualizationDomainDTO} from 'src/shared/modules/visualization/visualization.dto';
+import {IMatrixDomainDTO} from 'src/shared/modules/matrix/matrix.dto';
+import {ComposeValidators} from 'src/app/common/modules/form/utils/compose-validators/compose-validators';
+import {VisualizationDomain} from 'src/shared/modules/visualization/visualization.domain';
+import {Router} from '@angular/router';
+import {take} from 'rxjs/operators';
+import {AuthService} from 'src/app/common/modules/auth/auth.service';
+import {IVisualizationMatrixDomainDTO} from 'src/shared/modules/visualization/visualization.matrix/visualization.matrix.dto';
+import {Colors} from 'src/shared/enums/colors.enum';
+import {MarkAllControlsTouched} from '../../common/modules/form/utils/mark-all-controls-touched';
+import {IDimensionDTO} from 'src/shared/modules/dimension/dimension.dto';
+import {generateMatrixName} from 'src/app/common/modules/visualization/visualization-util/visualization-util.generate-chart-names';
+import {ModalComponent} from 'src/app/common/modules/modal/modal.component';
 import {LocalStorageKey} from '../../core/local-storage/local.storage.key';
 import {LocalStorageService} from '../../core/local-storage/local.storage.service';
 
@@ -53,11 +53,6 @@ export class VisualizationCreatorComponent implements OnInit {
     public readonly router: Router,
     private localStorage: LocalStorageService
   ) {
-    // Reload saved data if is any
-    const savedVisualiazation = this.localStorage.getItem(LocalStorageKey.CREATOR_VISUALIZATION);
-    if (savedVisualiazation) {
-      this.visualization = JSON.parse(savedVisualiazation);
-    }
   }
 
   ngOnInit() {
@@ -66,7 +61,12 @@ export class VisualizationCreatorComponent implements OnInit {
       title: [null, ComposeValidators(VisualizationDomain, 'title')],
       description: [null, ComposeValidators(VisualizationDomain, 'description')]
     });
+
     // Reload saved data if is any
+    const savedVisualiazation = this.localStorage.getItem(LocalStorageKey.CREATOR_VISUALIZATION);
+    if (savedVisualiazation) {
+      this.visualization = JSON.parse(savedVisualiazation);
+    }
     const savedForm = this.localStorage.getItem(LocalStorageKey.CREATOR_FORM);
     if (savedForm) {
       this.newVisualizationCreatorForm.setValue(JSON.parse(savedForm));
@@ -178,15 +178,13 @@ export class VisualizationCreatorComponent implements OnInit {
 
   private swapXAndYDimensions() {
     const swapX: IDimensionDTO = this.visualization.x;
-    const swapY: IDimensionDTO = this.visualization.y;
-    this.visualization.x = swapY;
+    this.visualization.x = this.visualization.y;
     this.visualization.y = swapX;
   }
 
   private swapYAndY2Dimensions() {
     const swapY: IDimensionDTO = this.visualization.y;
-    const swapY2: IDimensionDTO = this.visualization.y2;
-    this.visualization.y = swapY2;
+    this.visualization.y = this.visualization.y2;
     this.visualization.y2 = swapY;
   }
 
@@ -226,15 +224,19 @@ export class VisualizationCreatorComponent implements OnInit {
   private saveVisualization() {
     // Render object change
     this.visualization = Object.assign({}, this.visualization);
-    // Save for reload
-    this.localStorage.setItem(LocalStorageKey.CREATOR_VISUALIZATION, JSON.stringify(this.visualization));
+    // Save for reload if we are in creator
+    if (!this.edit) {
+      this.localStorage.setItem(LocalStorageKey.CREATOR_VISUALIZATION, JSON.stringify(this.visualization));
+    }
   }
 
   public saveForm() {
-    // Save for reload
-    this.localStorage.setItem(LocalStorageKey.CREATOR_FORM, JSON.stringify(
-      this.newVisualizationCreatorForm.value
-    ));
+    // Save for reload if we are in creator
+    if (!this.edit) {
+      this.localStorage.setItem(LocalStorageKey.CREATOR_FORM, JSON.stringify(
+        this.newVisualizationCreatorForm.value
+      ));
+    }
   }
 
   public async onSubmit() {
@@ -251,7 +253,7 @@ export class VisualizationCreatorComponent implements OnInit {
       this.isFormValid = false;
       this.newVisualizationCreatorForm.valueChanges
         .pipe(take(1))
-        .subscribe(o => {
+        .subscribe(() => {
           this.isFormValid = true;
         });
       return;

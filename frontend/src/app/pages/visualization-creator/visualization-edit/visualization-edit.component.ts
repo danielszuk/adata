@@ -11,6 +11,7 @@ import { ComposeValidators } from 'src/app/common/modules/form/utils/compose-val
 import { VisualizationDomain } from 'src/shared/modules/visualization/visualization.domain';
 import { MarkAllControlsTouched } from 'src/app/common/modules/form/utils/mark-all-controls-touched';
 import { take } from 'rxjs/operators';
+import {LocalStorageService} from '../../../core/local-storage/local.storage.service';
 
 @Component({
   selector: 'adata-visualization-edit',
@@ -29,9 +30,10 @@ export class VisualizationEditComponent extends VisualizationCreatorComponent
     fb: FormBuilder,
     authService: AuthService,
     router: Router,
-    public activetedRoute: ActivatedRoute
+    public activetedRoute: ActivatedRoute,
+    private localStorageService: LocalStorageService
   ) {
-    super(httpService, fb, authService, router);
+    super(httpService, fb, authService, router, localStorageService);
   }
 
   async ngOnInit() {
@@ -77,7 +79,7 @@ export class VisualizationEditComponent extends VisualizationCreatorComponent
       this.isFormValid = false;
       this.newVisualizationCreatorForm.valueChanges
         .pipe(take(1))
-        .subscribe(o => {
+        .subscribe(() => {
           this.isFormValid = true;
         });
       return;
