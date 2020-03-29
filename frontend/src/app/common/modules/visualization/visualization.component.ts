@@ -47,9 +47,6 @@ export class VisualizationComponent
     power: 0
   };
 
-  private xAxisArray: any[] = [];
-  private yAxisArray: any[] = [];
-  private chartIdsArray: string[] = [];
   public chartDataArray: any[] = [];
   private yAndY2AxisLimits: IYAndY2Limits;
   private yAxisObject: any;
@@ -96,8 +93,6 @@ export class VisualizationComponent
         y2: this.visualization.y2
       });
       this.colorPattern = chartData.colors;
-      this.xAxisArray = chartData.xAxisArray;
-      this.yAxisArray = chartData.yAxisArray;
       this.chartDataArray = [chartData.xAxisArray, ...chartData.yAxisArray];
 
       this.yAndY2AxisLimits = chartData.yAndY2AxisLimits;
@@ -109,10 +104,6 @@ export class VisualizationComponent
     if (this.chart) {
       this.chart.destroy();
     }
-
-    this.chartIdsArray = [
-      ...this.visualization.matrices.map(iv => iv.matrix.name)
-    ];
 
     this.generateChartData();
     // Validate dimensions
@@ -167,8 +158,8 @@ export class VisualizationComponent
       // },
       axis: {
         y: {
-          min: 0,
-          padding: { bottom: 7 },
+          max: this.yAndY2AxisLimits.y.max,
+          min: this.yAndY2AxisLimits.y.min,
           label: {
             text: formatLabelText(
               this.visualization.y,

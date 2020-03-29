@@ -124,6 +124,41 @@ function getYAndY2AxisMinMax(
       }
     }
   }
+
+  // Alignment y axes
+  const yExtent = Math.abs(yMax - yMin);
+  const y2Extent = Math.abs(y2Max - y2Min);
+  const extensionSensibility = 0.2;
+  // Alignment y axes to zero
+  const distantTo0 = (yValue: number) => Math.abs(0 - yValue);
+  if (distantTo0(yMin) < yExtent * extensionSensibility && yMin > 0) { yMin = 0; }
+  if (distantTo0(yMax) < yExtent * extensionSensibility && yMax < 0) { yMax = 0; }
+  if (distantTo0(y2Min) < y2Extent * extensionSensibility && y2Min > 0) { y2Min = 0; }
+  if (distantTo0(y2Max) < y2Extent * extensionSensibility && y2Max < 0) { y2Max = 0; }
+  // Alignment y axes to each other
+  if (
+    // if yAxes domains are overlap
+    ( (yMin <= y2Max && y2Max <= yMax) || (yMin <= y2Min && y2Min < yMax) )
+    // or if yAxes are close to each other
+    || (
+        // if y are above of y2
+        yMin > y2Max && (
+          yMin - y2Max < yExtent * extensionSensibility
+          || yMin - y2Max < y2Extent * extensionSensibility
+        )
+      )
+    || (
+      // if y2 are above of y
+      y2Min > yMax && (
+        y2Min - yMax < yExtent * extensionSensibility
+        || y2Min - yMax < y2Extent * extensionSensibility
+      )
+    )
+  ) {
+    yMin = y2Min = yMin < y2Min ? yMin : y2Min;
+    yMax = y2Max = yMax > y2Max ? yMax : y2Max;
+  }
+
   return { y: { max: yMax, min: yMin }, y2: { max: y2Max, min: y2Min } };
 }
 
@@ -131,7 +166,7 @@ function generateYAxisObject(
   matrices: IVisualizationMatrixDomainDTO[],
   chartAxis: IChartAxisDTO
 ): any {
-  let y2Object = {};
+  const y2Object = {};
   for (let i = matrices.length - 1; 0 <= i; i--) {
     if (chartAxis.y.id === matrices[i].matrix.dim1.id) {
       y2Object[matrices[i].matrix.name] = 'y';
