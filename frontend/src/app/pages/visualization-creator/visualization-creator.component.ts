@@ -14,6 +14,8 @@ import { MarkAllControlsTouched } from '../../common/modules/form/utils/mark-all
 import { IDimensionDTO } from 'src/shared/modules/dimension/dimension.dto';
 import { generateMatrixName } from 'src/app/common/modules/visualization/visualization-util/visualization-util.generate-chart-names';
 import { ModalComponent } from 'src/app/common/modules/modal/modal.component';
+import {LocalStorageKey} from '../../core/local-storage/local.storage.key';
+import {LocalStorageService} from '../../core/local-storage/local.storage.service';
 
 @Component({
   selector: 'adata-visualization-creator',
@@ -48,15 +50,27 @@ export class VisualizationCreatorComponent implements OnInit {
     public readonly httpService: HttpService,
     public fb: FormBuilder,
     public readonly authService: AuthService,
-    public readonly router: Router
-  ) {}
+    public readonly router: Router,
+    private localStorage: LocalStorageService
+  ) {
+    // Reload saved data if is any
+    const savedVisualiazation = this.localStorage.getItem(LocalStorageKey.CREATOR_VISUALIZATION);
+    if (savedVisualiazation) {
+      this.visualization = JSON.parse(savedVisualiazation);
+    }
+  }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.newVisualizationCreatorForm = this.fb.group({
       matrix: [],
       title: [null, ComposeValidators(VisualizationDomain, 'title')],
       description: [null, ComposeValidators(VisualizationDomain, 'description')]
     });
+    // Reload saved data if is any
+    const savedForm = this.localStorage.getItem(LocalStorageKey.CREATOR_FORM);
+    if (savedForm) {
+      this.newVisualizationCreatorForm.setValue(JSON.parse(savedForm));
+    }
     this.loading = false;
   }
 
@@ -159,7 +173,7 @@ export class VisualizationCreatorComponent implements OnInit {
       ...this.visualization.matrices,
       ...visualizationMatrices
     ];
-    this.cloneVisualization();
+    this.saveVisualization();
   }
 
   private swapXAndYDimensions() {
@@ -179,39 +193,48 @@ export class VisualizationCreatorComponent implements OnInit {
   public onRemoveMatrix(index: number) {
     this.visualization.matrices.splice(index, 1);
     const axisIndexes = [];
-    if (0 === this.visualization.matrices.length) {
-      return;
-    }
-    for (const m of this.visualization.matrices) {
-      const dim1Index = m.matrix.dim1.id;
-      const dim2Index = m.matrix.dim2.id;
-      if (-1 === axisIndexes.indexOf(dim1Index)) {
-        axisIndexes.push(dim1Index);
+    if (this.visualization.matrices.length) {
+      for (const m of this.visualization.matrices) {
+        const dim1Index = m.matrix.dim1.id;
+        const dim2Index = m.matrix.dim2.id;
+        if (-1 === axisIndexes.indexOf(dim1Index)) {
+          axisIndexes.push(dim1Index);
+        }
+        if (-1 === axisIndexes.indexOf(dim2Index)) {
+          axisIndexes.push(dim2Index);
+        }
       }
-      if (-1 === axisIndexes.indexOf(dim2Index)) {
-        axisIndexes.push(dim2Index);
+      if (-1 === axisIndexes.indexOf(this.visualization.y.id)) {
+        this.swapYAndY2Dimensions();
+        this.visualization.y2 = undefined;
+      }
+      if (
+        this.visualization.y2 &&
+        -1 === axisIndexes.indexOf(this.visualization.y2.id)
+      ) {
+        this.visualization.y2 = undefined;
       }
     }
-    if (-1 === axisIndexes.indexOf(this.visualization.y.id)) {
-      this.swapYAndY2Dimensions();
-      this.visualization.y2 = undefined;
-    }
-    if (
-      this.visualization.y2 &&
-      -1 === axisIndexes.indexOf(this.visualization.y2.id)
-    ) {
-      this.visualization.y2 = undefined;
-    }
-    this.cloneVisualization();
+    this.saveVisualization();
   }
 
   public onColorChanged(e: Colors, index: number) {
     this.visualization.matrices[index].color = e;
-    this.cloneVisualization();
+    this.saveVisualization();
   }
 
-  private cloneVisualization() {
+  private saveVisualization() {
+    // Render object change
     this.visualization = Object.assign({}, this.visualization);
+    // Save for reload
+    this.localStorage.setItem(LocalStorageKey.CREATOR_VISUALIZATION, JSON.stringify(this.visualization));
+  }
+
+  public saveForm() {
+    // Save for reload
+    this.localStorage.setItem(LocalStorageKey.CREATOR_FORM, JSON.stringify(
+      this.newVisualizationCreatorForm.value
+    ));
   }
 
   public async onSubmit() {
@@ -249,12 +272,12 @@ export class VisualizationCreatorComponent implements OnInit {
 
   public swapXAndYAxis() {
     this.swapXAndYDimensions();
-    this.cloneVisualization();
+    this.saveVisualization();
   }
 
   public swapYAndY2Axis() {
     this.swapYAndY2Dimensions();
-    this.cloneVisualization();
+    this.saveVisualization();
   }
 
   public updateVisualization() {}

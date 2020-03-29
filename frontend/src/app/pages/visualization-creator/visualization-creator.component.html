@@ -109,6 +109,7 @@
     <adata-form-input
       size="fill"
       [group]="newVisualizationCreatorForm"
+      (input)="saveForm()"
       controlName="title"
       placeholder="Title"
     ></adata-form-input>
@@ -118,6 +119,7 @@
       type="textarea"
       size="fill"
       [group]="newVisualizationCreatorForm"
+      (input)="saveForm()"
       controlName="description"
       placeholder="Description"
     >
