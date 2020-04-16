@@ -1,8 +1,8 @@
 [submodule "frontend/src/shared"]
 	path = frontend/src/shared
-	url = https://gitlab.com/codelise/adata/adata-shared.git
+	url = https://github.com/danielszuk/adata-shared.git
 	branch = master
 [submodule "backend/src/shared"]
 	path = backend/src/shared
-	url = https://gitlab.com/codelise/adata/adata-shared.git
+	url = https://github.com/danielszuk/adata-shared.git
 	branch = master
