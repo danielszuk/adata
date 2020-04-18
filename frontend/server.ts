@@ -12,6 +12,16 @@ const DIST_FOLDER = join(process.cwd(), `dist`);
 
 const app = express();
 
+app.get('*', function(req, res, next) {
+  if (req.headers.host.match(/^www/) !== null ) {
+    // redirect www to non-www
+
+    res.redirect(req.protocol + '://' + req.headers.host.replace(/^www\./, '') + req.url);
+  } else {
+    next();
+  }
+});
+
 // Security
 app.use(helmet());
 
