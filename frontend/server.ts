@@ -1,6 +1,3 @@
-// import * as Dotenv from 'dotenv-safe';
-// Dotenv.config();
-
 // These are important and needed before anything else
 import 'zone.js/dist/zone-node';
 import 'reflect-metadata';

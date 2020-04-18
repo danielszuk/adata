@@ -1,6 +1,6 @@
 {
   "name": "adata-web",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --port 4200",
@@ -29,7 +29,6 @@
     "class-transformer": "^0.2.0",
     "class-validator": "^0.9.1",
     "core-js": "^2.5.4",
-    "dotenv-safe": "^6.1.0",
     "express": "^4.16.4",
     "helmet": "^3.16.0",
     "moment-mini": "^2.22.1",
