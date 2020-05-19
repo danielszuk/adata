@@ -1,2 +1,7 @@
 runtime: nodejs10
 entrypoint: node dist/server.js
+handlers:
+- url: /.*
+  secure: always
+  redirect_http_response_code: 301
+  script: auto
