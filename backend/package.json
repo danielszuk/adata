@@ -36,7 +36,7 @@
     "install": "^0.12.2",
     "json-query": "^2.2.2",
     "jsonwebtoken": "^8.4.0",
-    "npm": "^6.7.0",
+    "npm": "^6.14.6",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-http-bearer": "^1.0.1",
